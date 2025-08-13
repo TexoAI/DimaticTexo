@@ -29,6 +29,7 @@ import sys
 from services import email_api
 from triggers import api as triggers_api
 from services import api_keys_api
+import os
 
 
 if sys.platform == "win32":
@@ -130,17 +131,16 @@ async def log_requests_middleware(request: Request, call_next):
         raise
 
 # Define allowed origins based on environment
-allowed_origins = ["https://www.suna.so", "https://suna.so"]
+allowed_origins = [os.getenv("NEXT_PUBLIC_URL")]
 allow_origin_regex = None
 
 # Add staging-specific origins
 if config.ENV_MODE == EnvMode.LOCAL:
-    allowed_origins.append("http://localhost:3000")
+    allowed_origins.append(os.getenv("NEXT_PUBLIC_URL"))
 
 # Add staging-specific origins
 if config.ENV_MODE == EnvMode.STAGING:
-    allowed_origins.append("https://staging.suna.so")
-    allowed_origins.append("http://localhost:3000")
+    allowed_origins.append(os.getenv("NEXT_PUBLIC_URL"))
     allow_origin_regex = r"https://suna-.*-prjcts\.vercel\.app"
 
 app.add_middleware(
