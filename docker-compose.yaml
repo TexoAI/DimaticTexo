@@ -3,8 +3,6 @@ services:
     image: redis:7-alpine
     ports:
       - "6379:6379"
-      networks:
-      - app-network # Attach this service to our custom network
     volumes:
       - redis_data:/data
       - ./backend/services/docker/redis.conf:/usr/local/etc/redis/redis.conf:ro
@@ -23,8 +21,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-      networks:
-      - app-network # Attach this service to our custom network
     # volumes:
     #   - ./backend/.env:/app/.env
     # env_file:
@@ -77,8 +73,6 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      networks:
-      - app-network # Attach this service to our custom network
     command: uv run dramatiq --skip-logging --processes 4 --threads 4 run_agent_background
     # volumes:
     #   - ./backend/.env:/app/.env:ro
@@ -134,8 +128,6 @@ services:
         - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     ports:
       - "3001:3001"
-      networks:
-      - app-network # Attach this service to our custom network
     environment:
       - NEXT_PUBLIC_ENV_MODE=${NEXT_PUBLIC_ENV_MODE}
       - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
