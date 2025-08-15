@@ -3,10 +3,10 @@ FROM ghcr.io/astral-sh/uv:python3.11-alpine
 ENV ENV_MODE production
 WORKDIR /app
 
-ARG RAILWAY_SERVICE_ID
-ENV SERVICE_ID=$RAILWAY_SERVICE_ID
+# ARG RAILWAY_SERVICE_ID
+# ENV SERVICE_ID=$RAILWAY_SERVICE_ID
 
-RUN echo ${SERVICE_ID}
+# RUN echo ${SERVICE_ID}
 
 # Install Python dependencies
 COPY pyproject.toml uv.lock ./
