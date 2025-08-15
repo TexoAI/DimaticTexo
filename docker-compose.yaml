@@ -22,7 +22,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/.env:/app/.env
+      - /opt/dokploy/env/.env
     env_file:
       - ./backend/.env
     environment:
@@ -44,7 +44,7 @@ services:
       dockerfile: Dockerfile
     command: uv run dramatiq --skip-logging --processes 4 --threads 4 run_agent_background
     volumes:
-      - ./backend/.env:/app/.env:ro
+      - /opt/dokploy/env/.env:ro
     env_file:
       - ./backend/.env
     environment:
@@ -67,7 +67,7 @@ services:
     ports:
       - "3001:3001"
     # volumes:
-      - ./frontend/.env.local:/app/.env.local:ro
+      - /opt/dokploy/env/.env.local:/app/.env.local:ro
     depends_on:
       - backend
 
