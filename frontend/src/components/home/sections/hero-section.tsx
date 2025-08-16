@@ -324,7 +324,7 @@ export function HeroSection() {
               <span className="text-secondary">AI Workforce.</span>
             </h1>
             <p className="text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight max-w-2xl px-2">
-            Kortix – the simplest way to migrate from human to AI.
+            Texo - So you can focus on growing your business.
             </p>
           </div>
 
@@ -334,7 +334,7 @@ export function HeroSection() {
                 <ChatInput
                   ref={chatInputRef}
                   onSubmit={handleChatInputSubmit}
-                  placeholder="Describe the agent you want to build or the task you want completed..."
+                  placeholder="Describe the task you need completed..."
                   loading={isSubmitting}
                   disabled={isSubmitting}
                   value={inputValue}
