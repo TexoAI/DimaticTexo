@@ -4,6 +4,7 @@ import posthog from 'posthog-js';
 
 // Get backend URL from environment variables
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+console.log('API URL:', API_URL);
 
 // Set to keep track of agent runs that are known to be non-running
 const nonRunningAgentRuns = new Set<string>();
