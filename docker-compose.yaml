@@ -1,8 +1,12 @@
 services:
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
+    # By default, services on the same network can communicate.
+    # Exposing the port to the host is only needed if you want to connect
+    # to Redis from outside the Docker environment (e.g., from your local machine).
+    # For service-to-service communication, this is not required.
+    # ports:
+    #   - "6379:6379"
     volumes:
       - redis_data:/data
       - ./backend/services/docker/redis.conf:/usr/local/etc/redis/redis.conf:ro
@@ -12,6 +16,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    # This policy ensures the service restarts automatically if it fails.
+    restart: unless-stopped
+    # Assigning the service to our custom network.
+    networks:
+      - suna-network
 
   backend:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -21,11 +30,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    # volumes:
-    #   - ./backend/.env:/app/.env
-    # env_file:
-    #   - ./backend/.env
     environment:
+      # The hostname for redis is now its service name, 'redis'.
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
@@ -34,8 +40,6 @@ services:
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
       - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
-      - REDIS_HOST=${REDIS_HOST}
-      - REDIS_PORT=${REDIS_PORT}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
@@ -64,8 +68,9 @@ services:
     depends_on:
       redis:
         condition: service_healthy
-      worker:
-        condition: service_started
+    restart: unless-stopped
+    networks:
+      - suna-network
 
   worker:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -74,10 +79,6 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: uv run dramatiq --skip-logging --processes 4 --threads 4 run_agent_background
-    # volumes:
-    #   - ./backend/.env:/app/.env:ro
-    # env_file:
-    #   - ./backend/.env
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -87,8 +88,6 @@ services:
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
       - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
-      - REDIS_HOST=${REDIS_HOST}
-      - REDIS_PORT=${REDIS_PORT}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
@@ -117,6 +116,9 @@ services:
     depends_on:
       redis:
         condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - suna-network
 
   frontend:
     init: true
@@ -139,10 +141,18 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
       - EDGE_CONFIG=${EDGE_CONFIG}
-    # volumes:
-    #   - ./frontend/.env.local:/app/.env.local:ro
     depends_on:
       - backend
+    restart: unless-stopped
+    networks:
+      - suna-network
+
+# Defining a dedicated network for all services to join.
+# This is the standard way to ensure reliable communication.
+networks:
+  suna-network:
+    driver: bridge
 
 volumes:
   redis_data:
+    # Defining the volume explicitly is good practice.
