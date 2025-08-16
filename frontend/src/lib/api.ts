@@ -1559,7 +1559,7 @@ export const checkApiHealth = async (): Promise<HealthCheckResponse> => {
     if (!response.ok) {
       throw new Error(`API health check failed: ${response.statusText}`);
     }
-
+    console.log(`health check url: ${API_URL}/health`)
     return response.json();
   } catch (error) {
     throw error;
