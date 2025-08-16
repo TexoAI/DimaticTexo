@@ -58,16 +58,13 @@ export interface PricingTier {
 }
 
 export const siteConfig = {
-  name: 'Kortix Suna',
-  description: 'The Generalist AI Worker that can act on your behalf.',
+  name: 'Dimatic Texo',
+  description: 'The digital automation assistant that can act on your behalf.',
   cta: 'Start Free',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   keywords: ['AI Worker', 'Generalist AI', 'Open Source AI', 'Autonomous Agent'],
   links: {
     email: 'support@kortix.ai',
-    twitter: 'https://x.com/kortixai',
-    // discord: 'https://discord.gg/kortixai',
-    github: 'https://github.com/Kortix-ai/Suna',
     instagram: 'https://instagram.com/kortixai',
   },
   nav: {
@@ -75,9 +72,7 @@ export const siteConfig = {
       { id: 1, name: 'Home', href: '#hero' },
       { id: 2, name: 'Process', href: '#process' },
       // { id: 3, name: 'Use Cases', href: '#use-cases' },
-      { id: 4, name: 'Open Source', href: '#open-source' },
       { id: 5, name: 'Pricing', href: '#pricing' },
-      { id: 6, name: 'Enterprise', href: '/enterprise' },
     ],
   },
   hero: {
@@ -107,12 +102,10 @@ export const siteConfig = {
         />
       </svg>
     ),
-    badge: '100% OPEN SOURCE',
-    githubUrl: 'https://github.com/kortix-ai/suna',
-    title: 'Kortix – Build, manage and train your AI Workforce.',
+    title: 'Dimatic – Build, manage and train your digital assistants.',
     description:
-      'Kortix – open-source platform to build, manage and train your AI Workforce.',
-    inputPlaceholder: 'Ask Suna to...',
+      'Dimatic – Automation platform to build, manage and train your digital assistants.',
+    inputPlaceholder: 'Ask Texo to...',
   },
   cloudPricingItems: [
     {
@@ -503,15 +496,15 @@ export const siteConfig = {
     ],
   },
   featureSection: {
-    title: 'How Kortix Suna Works',
+    title: 'How Dimatic Texo Works',
     description:
-      'Discover how Kortix Suna transforms your commands into action in four easy steps',
+      'Discover how Dimatic Texo transforms your commands into action in four easy steps',
     items: [
       {
         id: 1,
         title: 'Request an Action',
         content:
-          'Speak or type your command—let Kortix Suna capture your intent. Your request instantly sets the process in motion.',
+          'Speak or type your command—let Dimatic Texo capture your intent. Your request instantly sets the process in motion.',
         image:
           'https://images.unsplash.com/photo-1720371300677-ba4838fa0678?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
@@ -519,7 +512,7 @@ export const siteConfig = {
         id: 2,
         title: 'AI Understanding & Planning',
         content:
-          'Suna analyzes your request, understands the context, and develops a structured plan to complete the task efficiently.',
+          'Texo analyzes your request, understands the context, and develops a structured plan to complete the task efficiently.',
         image:
           'https://images.unsplash.com/photo-1686170287433-c95faf6d3608?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8fA%3D%3D',
       },
@@ -527,7 +520,7 @@ export const siteConfig = {
         id: 3,
         title: 'Autonomous Execution',
         content:
-          'Using its capabilities and integrations, Suna executes the task independently, handling any complexities along the way.',
+          'Using its capabilities and integrations, Texo executes the task independently, handling any complexities along the way.',
         image:
           'https://images.unsplash.com/photo-1720378042271-60aff1e1c538?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D',
       },
@@ -535,30 +528,30 @@ export const siteConfig = {
         id: 4,
         title: 'Results & Learning',
         content:
-          'Suna delivers results and learns from each interaction, continuously improving its performance to better serve your needs.',
+          'Texo delivers results and learns from each interaction, continuously improving its performance to better serve your needs.',
         image:
           'https://images.unsplash.com/photo-1666882990322-e7f3b8df4f75?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
       },
     ],
   },
   bentoSection: {
-    title: 'Empower Your Workflow with Kortix Suna',
+    title: 'Empower Your Workflow with Dimatic Texo',
     description:
-      'Let Kortix Suna act on your behalf with advanced AI capabilities, seamless integrations, and autonomous task execution.',
+      'Let Dimatic Texo act on your behalf with advanced AI capabilities, seamless integrations, and autonomous task execution.',
     items: [
       {
         id: 1,
         content: <FirstBentoAnimation />,
         title: 'Autonomous Task Execution',
         description:
-          'Experience true automation with Suna. Ask your AI Worker to complete tasks, research information, and handle complex workflows with minimal supervision.',
+          'Experience true automation with Texo. Ask your AI Worker to complete tasks, research information, and handle complex workflows with minimal supervision.',
       },
       {
         id: 2,
         content: <SecondBentoAnimation />,
         title: 'Seamless Integrations',
         description:
-          'Connect Suna to your existing tools for a unified workflow. Boost productivity through AI-powered interconnected systems.',
+          'Connect Texo to your existing tools for a unified workflow. Boost productivity through AI-powered interconnected systems.',
       },
       {
         id: 3,
@@ -572,21 +565,21 @@ export const siteConfig = {
         ),
         title: 'Intelligent Data Analysis',
         description:
-          "Transform raw data into actionable insights in seconds. Make better decisions with Suna's real-time, adaptive intelligence.",
+          "Transform raw data into actionable insights in seconds. Make better decisions with Texo's real-time, adaptive intelligence.",
       },
       {
         id: 4,
         content: <FourthBentoAnimation once={false} />,
         title: 'Complete Customization',
         description:
-          'Tailor Suna to your specific needs. As an open source solution, you have full control over its capabilities, integrations, and implementation.',
+          'Tailor Texo to your specific needs. As an open source solution, you have full control over its capabilities, integrations, and implementation.',
       },
     ],
   },
   benefits: [
     {
       id: 1,
-      text: "Automate everyday tasks with Suna's powerful AI capabilities.",
+      text: "Automate everyday tasks with Texo's powerful AI capabilities.",
       image: '/Device-6.png',
     },
     {
@@ -596,7 +589,7 @@ export const siteConfig = {
     },
     {
       id: 3,
-      text: 'Improve focus on high-value work as Suna handles the routine.',
+      text: 'Improve focus on high-value work as Texo handles the routine.',
       image: '/Device-8.png',
     },
     {
@@ -886,12 +879,6 @@ export const siteConfig = {
               />
             </motion.div>
           </div>
-        ),
-
-        title: 'Open Source Security',
-        description:
-          'Benefit from the security of open source code that thousands of eyes can review, audit, and improve.',
-      },
       {
         id: 2,
         content: (
@@ -900,290 +887,10 @@ export const siteConfig = {
           </div>
         ),
 
-        title: 'Community Powered',
-        description:
-          "Join a thriving community of developers and users continuously enhancing and expanding Suna's capabilities.",
-      },
-    ],
-  },
-  quoteSection: {
-    quote:
-      'Kortix Suna has transformed how we approach everyday tasks. The level of automation it provides, combined with its open source nature, makes it an invaluable tool for our entire organization.',
-    author: {
-      name: 'Alex Johnson',
-      role: 'CTO, Innovatech',
-      image: 'https://randomuser.me/api/portraits/men/91.jpg',
-    },
-  },
-  pricing: {
-    title: 'Open Source & Free Forever',
-    description:
-      'Kortix Suna is 100% open source and free to use. No hidden fees, no premium features locked behind paywalls.',
-    pricingItems: [
-      {
-        name: 'Community',
-        href: '#',
-        price: 'Free',
-        period: 'forever',
-        yearlyPrice: 'Free',
-        features: [
-          'Full agent capabilities',
-          'Unlimited usage',
-          'Full source code access',
-          'Community support',
-        ],
-        description: 'Perfect for individual users and developers',
-        buttonText: 'Hire Suna',
-        buttonColor: 'bg-accent text-primary',
-        isPopular: false,
-      },
-      {
-        name: 'Self-Hosted',
-        href: '#',
-        price: 'Free',
-        period: 'forever',
-        yearlyPrice: 'Free',
-        features: [
-          'Full agent capabilities',
-          'Unlimited usage',
-          'Full source code access',
-          'Custom deployment',
-          'Local data storage',
-          'Integration with your tools',
-          'Full customization',
-          'Community support',
-        ],
-        description: 'Ideal for organizations with specific requirements',
-        buttonText: 'View Docs',
-        buttonColor: 'bg-secondary text-white',
-        isPopular: true,
-      },
-      {
-        name: 'Enterprise',
-        href: '#',
-        price: 'Custom',
-        period: '',
-        yearlyPrice: 'Custom',
-        features: [
-          'Everything in Self-Hosted',
-          'Priority support',
-          'Custom development',
-          'Dedicated hosting',
-          'SLA guarantees',
-        ],
-        description: 'For large teams needing custom implementations',
-        buttonText: 'Contact Us',
-        buttonColor: 'bg-primary text-primary-foreground',
-        isPopular: false,
-      },
-    ],
-  },
-  testimonials: [
-    {
-      id: '1',
-      name: 'Alex Rivera',
-      role: 'CTO at InnovateTech',
-      img: 'https://randomuser.me/api/portraits/men/91.jpg',
-      description: (
-        <p>
-          The AI-driven analytics from #QuantumInsights have revolutionized our
-          product development cycle.
-          <Highlight>
-            Insights are now more accurate and faster than ever.
-          </Highlight>{' '}
-          A game-changer for tech companies.
-        </p>
-      ),
-    },
-    {
-      id: '2',
-      name: 'Samantha Lee',
-      role: 'Marketing Director at NextGen Solutions',
-      img: 'https://randomuser.me/api/portraits/women/12.jpg',
-      description: (
-        <p>
-          Implementing #AIStream&apos;s customer prediction model has
-          drastically improved our targeting strategy.
-          <Highlight>Seeing a 50% increase in conversion rates!</Highlight>{' '}
-          Highly recommend their solutions.
-        </p>
-      ),
-    },
-    {
-      id: '3',
-      name: 'Raj Patel',
-      role: 'Founder & CEO at StartUp Grid',
-      img: 'https://randomuser.me/api/portraits/men/45.jpg',
-      description: (
-        <p>
-          As a startup, we need to move fast and stay ahead. #CodeAI&apos;s
-          automated coding assistant helps us do just that.
-          <Highlight>Our development speed has doubled.</Highlight> Essential
-          tool for any startup.
-        </p>
-      ),
-    },
-    {
-      id: '4',
-      name: 'Emily Chen',
-      role: 'Product Manager at Digital Wave',
-      img: 'https://randomuser.me/api/portraits/women/83.jpg',
-      description: (
-        <p>
-          #VoiceGen&apos;s AI-driven voice synthesis has made creating global
-          products a breeze.
-          <Highlight>Localization is now seamless and efficient.</Highlight> A
-          must-have for global product teams.
-        </p>
-      ),
-    },
-    {
-      id: '5',
-      name: 'Michael Brown',
-      role: 'Data Scientist at FinTech Innovations',
-      img: 'https://randomuser.me/api/portraits/men/1.jpg',
-      description: (
-        <p>
-          Leveraging #DataCrunch&apos;s AI for our financial models has given us
-          an edge in predictive accuracy.
-          <Highlight>
-            Our investment strategies are now powered by real-time data
-            analytics.
-          </Highlight>{' '}
-          Transformative for the finance industry.
-        </p>
-      ),
-    },
-    {
-      id: '6',
-      name: 'Linda Wu',
-      role: 'VP of Operations at LogiChain Solutions',
-      img: 'https://randomuser.me/api/portraits/women/5.jpg',
-      description: (
-        <p>
-          #LogiTech&apos;s supply chain optimization tools have drastically
-          reduced our operational costs.
-          <Highlight>
-            Efficiency and accuracy in logistics have never been better.
-          </Highlight>{' '}
-        </p>
-      ),
-    },
-    {
-      id: '7',
-      name: 'Carlos Gomez',
-      role: 'Head of R&D at EcoInnovate',
-      img: 'https://randomuser.me/api/portraits/men/14.jpg',
-      description: (
-        <p>
-          By integrating #GreenTech&apos;s sustainable energy solutions,
-          we&apos;ve seen a significant reduction in carbon footprint.
-          <Highlight>
-            Leading the way in eco-friendly business practices.
-          </Highlight>{' '}
-          Pioneering change in the industry.
-        </p>
-      ),
-    },
-    {
-      id: '8',
-      name: 'Aisha Khan',
-      role: 'Chief Marketing Officer at Fashion Forward',
-      img: 'https://randomuser.me/api/portraits/women/56.jpg',
-      description: (
-        <p>
-          #TrendSetter&apos;s market analysis AI has transformed how we approach
-          fashion trends.
-          <Highlight>
-            Our campaigns are now data-driven with higher customer engagement.
-          </Highlight>{' '}
-          Revolutionizing fashion marketing.
-        </p>
-      ),
-    },
-    {
-      id: '9',
-      name: 'Tom Chen',
-      role: 'Director of IT at HealthTech Solutions',
-      img: 'https://randomuser.me/api/portraits/men/18.jpg',
-      description: (
-        <p>
-          Implementing #MediCareAI in our patient care systems has improved
-          patient outcomes significantly.
-          <Highlight>
-            Technology and healthcare working hand in hand for better health.
-          </Highlight>{' '}
-          A milestone in medical technology.
-        </p>
-      ),
-    },
-    {
-      id: '10',
-      name: 'Sofia Patel',
-      role: 'CEO at EduTech Innovations',
-      img: 'https://randomuser.me/api/portraits/women/73.jpg',
-      description: (
-        <p>
-          #LearnSmart&apos;s AI-driven personalized learning plans have doubled
-          student performance metrics.
-          <Highlight>
-            Education tailored to every learner&apos;s needs.
-          </Highlight>{' '}
-          Transforming the educational landscape.
-        </p>
-      ),
-    },
-    {
-      id: '11',
-      name: 'Jake Morrison',
-      role: 'CTO at SecureNet Tech',
-      img: 'https://randomuser.me/api/portraits/men/25.jpg',
-      description: (
-        <p>
-          With #CyberShield&apos;s AI-powered security systems, our data
-          protection levels are unmatched.
-          <Highlight>
-            Ensuring safety and trust in digital spaces.
-          </Highlight>{' '}
-          Redefining cybersecurity standards.
-        </p>
-      ),
-    },
-    {
-      id: '12',
-      name: 'Nadia Ali',
-      role: 'Product Manager at Creative Solutions',
-      img: 'https://randomuser.me/api/portraits/women/78.jpg',
-      description: (
-        <p>
-          #DesignPro&apos;s AI has streamlined our creative process, enhancing
-          productivity and innovation.
-          <Highlight>Bringing creativity and technology together.</Highlight> A
-          game-changer for creative industries.
-        </p>
-      ),
-    },
-    {
-      id: '13',
-      name: 'Omar Farooq',
-      role: 'Founder at Startup Hub',
-      img: 'https://randomuser.me/api/portraits/men/54.jpg',
-      description: (
-        <p>
-          #VentureAI&apos;s insights into startup ecosystems have been
-          invaluable for our growth and funding strategies.
-          <Highlight>
-            Empowering startups with data-driven decisions.
-          </Highlight>{' '}
-          A catalyst for startup success.
-        </p>
-      ),
-    },
-  ],
-  faqSection: {
+        faqSection: {
     title: 'Frequently Asked Questions',
     description:
-      "Answers to common questions about Kortix Suna and its capabilities. If you have any other questions, please don't hesitate to contact us.",
+      "Answers to common questions about Dimatic Texo and its capabilities. If you have any other questions, please don't hesitate to contact us.",
     faQitems: [
       {
         id: 1,
@@ -1193,33 +900,21 @@ export const siteConfig = {
       },
       {
         id: 2,
-        question: 'How does Kortix Suna work?',
+        question: 'How does Dimatic Texo work?',
         answer:
-          'Kortix Suna works by analyzing your requirements, leveraging advanced AI algorithms to understand context, and executing tasks based on your instructions. It can integrate with your workflow, learn from feedback, and continuously improve its performance.',
+          'Dimatic Texo works by analyzing your requirements, leveraging advanced AI algorithms to understand context, and executing tasks based on your instructions. It can integrate with your workflow, learn from feedback, and continuously improve its performance.',
       },
       {
         id: 3,
-        question: 'Is Kortix Suna really free?',
+        question: 'Can I integrate Texo with my existing tools?',
         answer:
-          'Yes, Kortix Suna is completely free and open source. We believe in democratizing AI technology and making it accessible to everyone. You can use it, modify it, and contribute to its development without any cost.',
+          'Yes, Dimatic Texo is designed to be highly compatible with popular tools and platforms. We offer APIs and pre-built integrations for seamless connection with your existing workflow tools and systems.',
       },
       {
         id: 4,
-        question: 'Can I integrate Suna with my existing tools?',
+        question: 'How does Dimatic Texo save me time?',
         answer:
-          'Yes, Kortix Suna is designed to be highly compatible with popular tools and platforms. We offer APIs and pre-built integrations for seamless connection with your existing workflow tools and systems.',
-      },
-      {
-        id: 5,
-        question: 'How can I contribute to Kortix Suna?',
-        answer:
-          'You can contribute to Kortix Suna by submitting pull requests on GitHub, reporting bugs, suggesting new features, or helping with documentation. Join our Discord community to connect with other contributors and Hire Suna.',
-      },
-      {
-        id: 6,
-        question: 'How does Kortix Suna save me time?',
-        answer:
-          'Kortix Suna automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.',
+          'Dimatic Texo automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.',
       },
     ],
   },
@@ -1235,7 +930,7 @@ export const siteConfig = {
   },
   footerLinks: [
     {
-      title: 'Kortix',
+      title: 'Dimatic',
       links: [
         { id: 1, title: 'About', url: 'https://kortix.ai' },
         { id: 3, title: 'Contact', url: 'mailto:hey@kortix.ai' },
@@ -1248,10 +943,10 @@ export const siteConfig = {
         {
           id: 5,
           title: 'Documentation',
-          url: 'https://github.com/Kortix-ai/Suna',
+          url: 'https://github.com/Dimatic-ai/Texo',
         },
         { id: 7, title: 'Discord', url: 'https://discord.gg/Py6pCBUUPw' },
-        { id: 8, title: 'GitHub', url: 'https://github.com/Kortix-ai/Suna' },
+        { id: 8, title: 'GitHub', url: 'https://github.com/Dimatic-ai/Texo' },
       ],
     },
     {
@@ -1270,7 +965,7 @@ export const siteConfig = {
         {
           id: 11,
           title: 'License Apache 2.0',
-          url: 'https://github.com/Kortix-ai/Suna/blob/main/LICENSE',
+          url: 'https://github.com/Dimatic-ai/Texo/blob/main/LICENSE',
         },
       ],
     },
