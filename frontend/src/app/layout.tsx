@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description:
-    'Kortix is a fully open source AI assistant that helps you accomplish real-world tasks with ease. Through natural conversation, Kortix becomes your digital companion for research, data analysis, and everyday challenges.',
+    'Dimatic Texo is a fully open source AI assistant that helps you accomplish real-world tasks with ease. Through natural conversation, Kortix becomes your digital companion for research, data analysis, and everyday challenges.',
   keywords: [
     'AI',
     'artificial intelligence',
@@ -41,17 +41,9 @@ export const metadata: Metadata = {
     'web scraping',
     'file management',
     'AI assistant',
-    'open source',
     'research',
     'data analysis',
   ],
-  authors: [{ name: 'Kortix Team', url: 'https://suna.so' }],
-  creator:
-    'Kortix Team',
-  publisher:
-    'Kortix Team',
-  category: 'Technology',
-  applicationName: 'Suna',
   formatDetection: {
     telephone: false,
     email: false,
@@ -66,40 +58,24 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Suna - Open Source Generalist AI Worker',
+    title: 'Texo - Your Digital Automation Assistant',
     description:
-      'Suna is a fully open source AI assistant that helps you accomplish real-world tasks with ease through natural conversation.',
+      'Your digital assistant that handles emails, scheduling, and more - so you can focus on growing your business.',
     url: siteConfig.url,
-    siteName: 'Suna',
+    siteName: 'Texo',
     images: [
       {
         url: '/banner.png',
         width: 1200,
         height: 630,
-        alt: 'Suna - Open Source Generalist AI Worker',
+        alt: 'Texo - Your Digital Automation Assistant',
         type: 'image/png',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_AUS',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Suna - Open Source Generalist AI Worker',
-    description:
-      'Suna is a fully open source AI assistant that helps you accomplish real-world tasks with ease through natural conversation.',
-    creator: '@kortixai',
-    site: '@kortixai',
-    images: [
-      {
-        url: '/banner.png',
-        width: 1200,
-        height: 630,
-        alt: 'Suna - Open Source Generalist AI Worker',
-      },
-    ],
-  },
-  icons: {
+ icons: {
     icon: [{ url: '/favicon.png', sizes: 'any' }],
     shortcut: '/favicon.png',
   },
