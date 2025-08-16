@@ -62,7 +62,6 @@ export function Navbar() {
   const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const { user } = useAuth();
-  const { formattedStars, loading: starsLoading } = useGitHubStars('kortix-ai', 'suna');
   const router = useRouter();
   const pathname = usePathname();
 
@@ -232,7 +231,7 @@ export function Navbar() {
                       priority
                     />
                     <span className="font-medium text-primary text-sm">
-                      / Suna
+                      / Texo
                     </span>
                   </Link>
                   <button
