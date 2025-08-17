@@ -72,11 +72,11 @@ async def get_agent_knowledge_base(
     include_inactive: bool = False,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     
     """Get all knowledge base entries for an agent"""
     try:
@@ -130,11 +130,11 @@ async def create_agent_knowledge_base_entry(
     entry_data: CreateKnowledgeBaseEntryRequest,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     
     """Create a new knowledge base entry for an agent"""
     try:
@@ -185,11 +185,11 @@ async def upload_file_to_agent_kb(
     file: UploadFile = File(...),
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     
     """Upload and process a file for agent knowledge base"""
     try:
@@ -244,11 +244,11 @@ async def update_knowledge_base_entry(
     entry_data: UpdateKnowledgeBaseEntryRequest,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     
     """Update an agent knowledge base entry"""
     try:
@@ -317,11 +317,11 @@ async def delete_knowledge_base_entry(
     entry_id: str,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
 
     """Delete an agent knowledge base entry"""
     try:
@@ -357,11 +357,11 @@ async def get_knowledge_base_entry(
     entry_id: str,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     """Get a specific agent knowledge base entry"""
     try:
         client = await db.client
@@ -409,11 +409,11 @@ async def get_agent_processing_jobs(
     limit: int = 10,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     
     """Get processing jobs for an agent"""
     try:
@@ -506,11 +506,11 @@ async def get_agent_knowledge_base_context(
     max_tokens: int = 4000,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("knowledge_base"):
-        raise HTTPException(
-            status_code=403, 
-            detail="This feature is not available at the moment."
-        )
+    # if not await is_enabled("knowledge_base"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="This feature is not available at the moment."
+    #     )
     
     """Get knowledge base context for agent prompts"""
     try:

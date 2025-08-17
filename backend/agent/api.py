@@ -1350,11 +1350,11 @@ async def get_agents(
     tools: Optional[str] = Query(None, description="Comma-separated list of tools to filter by")
 ):
     """Get agents for the current user with pagination, search, sort, and filter support."""
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agents currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agents currently disabled. This feature is not available at the moment."
+    #     )
     logger.info(f"Fetching agents for user: {user_id} with page={page}, limit={limit}, search='{search}', sort_by={sort_by}, sort_order={sort_order}")
     client = await db.client
     
@@ -1609,11 +1609,11 @@ async def get_agents(
 @router.get("/agents/{agent_id}", response_model=AgentResponse)
 async def get_agent(agent_id: str, user_id: str = Depends(get_current_user_id_from_jwt)):
     """Get a specific agent by ID with current version information. Only the owner can access non-public agents."""
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agents currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agents currently disabled. This feature is not available at the moment."
+    #     )
     
     logger.info(f"Fetching agent {agent_id} for user: {user_id}")
     client = await db.client
@@ -1833,11 +1833,11 @@ async def analyze_json_for_import(
     """Analyze imported JSON to determine required credentials and configurations"""
     logger.info(f"Analyzing JSON for import - user: {user_id}")
     
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agents currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agents currently disabled. This feature is not available at the moment."
+    #     )
     
     try:
         from agent.json_import_service import JsonImportService
@@ -1863,11 +1863,11 @@ async def import_agent_from_json(
 ):
     logger.info(f"Importing agent from JSON - user: {user_id}")
     
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agents currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agents currently disabled. This feature is not available at the moment."
+    #     )
     
     client = await db.client
     from .utils import check_agent_count_limit
@@ -1918,11 +1918,11 @@ async def create_agent(
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
     logger.info(f"Creating new agent for user: {user_id}")
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agents currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agents currently disabled. This feature is not available at the moment."
+    #     )
     client = await db.client
     
     from .utils import check_agent_count_limit
@@ -2064,11 +2064,11 @@ async def update_agent(
     agent_data: AgentUpdateRequest,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agent currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agent currently disabled. This feature is not available at the moment."
+    #     )
     logger.info(f"Updating agent {agent_id} for user: {user_id}")
     client = await db.client
     
@@ -2393,11 +2393,11 @@ async def update_agent(
 
 @router.delete("/agents/{agent_id}")
 async def delete_agent(agent_id: str, user_id: str = Depends(get_current_user_id_from_jwt)):
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agent currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agent currently disabled. This feature is not available at the moment."
+    #     )
     logger.info(f"Deleting agent: {agent_id}")
     client = await db.client
     
@@ -2442,11 +2442,11 @@ async def get_agent_builder_chat_history(
     agent_id: str,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(
-            status_code=403, 
-            detail="Custom agents currently disabled. This feature is not available at the moment."
-        )
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(
+    #         status_code=403, 
+    #         detail="Custom agents currently disabled. This feature is not available at the moment."
+    #     )
     
     logger.info(f"Fetching agent builder chat history for agent: {agent_id}")
     client = await db.client
@@ -2896,8 +2896,8 @@ async def get_agent_tools(
     agent_id: str,
     user_id: str = Depends(get_current_user_id_from_jwt)
 ):
-    if not await is_enabled("custom_agents"):
-        raise HTTPException(status_code=403, detail="Custom agents currently disabled")
+    # if not await is_enabled("custom_agents"):
+    #     raise HTTPException(status_code=403, detail="Custom agents currently disabled")
         
     logger.info(f"Fetching enabled tools for agent: {agent_id} by user: {user_id}")
     client = await db.client

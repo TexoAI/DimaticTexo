@@ -17,8 +17,8 @@ async def get_feature_flags():
 @router.get("/feature-flags/{flag_name}")
 async def get_feature_flag(flag_name: str):
     try:
-        enabled = await is_enabled(flag_name)
-        details = await get_flag_details(flag_name)
+        enabled = True #await is_enabled(flag_name)
+        details = flag_name #await get_flag_details(flag_name)
         return {
             "flag_name": flag_name,
             "enabled": enabled,
