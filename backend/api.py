@@ -131,16 +131,16 @@ async def log_requests_middleware(request: Request, call_next):
         raise
 
 # Define allowed origins based on environment
-allowed_origins = [os.getenv("NEXT_PUBLIC_URL")]
+allowed_origins = [os.getenv("NEXT_PUBLIC_URL"), 'https://dimatic-texo-mg8o.vercel.app/']
 allow_origin_regex = None
 
 # Add staging-specific origins
 if config.ENV_MODE == EnvMode.LOCAL:
-    allowed_origins.append(os.getenv("NEXT_PUBLIC_URL"))
+    allowed_origins.append([os.getenv("NEXT_PUBLIC_URL"), 'https://dimatic-texo-mg8o.vercel.app/'])
 
 # Add staging-specific origins
 if config.ENV_MODE == EnvMode.STAGING:
-    allowed_origins.append(os.getenv("NEXT_PUBLIC_URL"))
+    allowed_origins.append([os.getenv("NEXT_PUBLIC_URL"), 'https://dimatic-texo-mg8o.vercel.app/'])
     allow_origin_regex = r"https://suna-.*-prjcts\.vercel\.app"
 
 app.add_middleware(
