@@ -4,7 +4,6 @@ import posthog from 'posthog-js';
 
 // Get backend URL from environment variables
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
-console.log('API URL:', API_URL);
 
 // Set to keep track of agent runs that are known to be non-running
 const nonRunningAgentRuns = new Set<string>();
@@ -1559,7 +1558,6 @@ export const checkApiHealth = async (): Promise<HealthCheckResponse> => {
     if (!response.ok) {
       throw new Error(`API health check failed: ${response.statusText}`);
     }
-    console.log(`health check url: ${API_URL}/health`)
     return response.json();
   } catch (error) {
     throw error;
