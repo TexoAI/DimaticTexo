@@ -7,8 +7,6 @@ services:
     # For service-to-service communication, this is not required.
     # ports:
     #   - "6379:6379"
-    sysctls:
-      - vm.overcommit_memory=1
     volumes:
       - redis_data:/data
       - ./backend/services/docker/redis.conf:/usr/local/etc/redis/redis.conf:ro
