@@ -51,7 +51,7 @@ import JSZip from 'jszip';
 import { normalizeFilenameToNFC } from '@/lib/utils/unicode';
 
 // Define API_URL
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
 
 interface FileViewerModalProps {
   open: boolean;

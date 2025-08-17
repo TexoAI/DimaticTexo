@@ -16,7 +16,7 @@ import {
 import { UploadedFile } from './chat-input';
 import { normalizeFilenameToNFC } from '@/lib/utils/unicode';
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
 
 const handleLocalFiles = (
   files: File[],
