@@ -132,7 +132,7 @@ async def log_requests_middleware(request: Request, call_next):
 
 # Define allowed origins based on environment
 logger.info(f"NEXT_PUBLIC_URL: {os.getenv("NEXT_PUBLIC_URL")}")
-allowed_origins = ['http://31.97.233.167:3001/', 'https://dimatic-texo-mg8o.vercel.app/']
+allowed_origins = ['http:///localhost:3001' ,'http://31.97.233.167:3001', 'https://dimatic-texo-mg8o.vercel.app']
 allow_origin_regex = None
 
 # Add staging-specific origins
