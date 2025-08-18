@@ -1152,11 +1152,13 @@ class ResponseProcessor:
             - tool_call: Dict with 'function_name', 'xml_tag_name', 'arguments'
             - parsing_details: Dict with 'attributes', 'elements', 'text_content', 'root_content'
         """
-        try:
+        try:    
+            logger.debug(f"Parsing XML chunk: {xml_chunk}")
             # Check if this is the new format (contains <function_calls>)
             if '<function_calls>' in xml_chunk and '<invoke' in xml_chunk:
                 # Use the new XML parser
                 parsed_calls = self.xml_parser.parse_content(xml_chunk)
+                logger.debug(f"Parsed XML tool calls: {parsed_calls}")
                 
                 if not parsed_calls:
                     logger.error(f"No tool calls found in XML chunk: {xml_chunk}")
@@ -1164,13 +1166,15 @@ class ResponseProcessor:
                 
                 # Take the first tool call (should only be one per chunk)
                 xml_tool_call = parsed_calls[0]
-                
+                logger.debug(f"Extracted XML tool call: {xml_tool_call}")
+
                 # Convert to the expected format
                 tool_call = {
                     "function_name": xml_tool_call.function_name,
                     "xml_tag_name": xml_tool_call.function_name.replace('_', '-'),  # For backwards compatibility
                     "arguments": xml_tool_call.parameters
                 }
+                logger.debug(f"Converted tool call: {tool_call}")
                 
                 # Include the parsing details
                 parsing_details = xml_tool_call.parsing_details
