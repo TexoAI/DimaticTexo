@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/input';
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.texoai.com.au/';
 
 interface CustomMCPDialogProps {
   open: boolean;

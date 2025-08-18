@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { createClient } from '@/lib/supabase/client';
 import { isFlagEnabled } from '@/lib/feature-flags';
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.texoai.com.au';
 
 export interface AgentTool {
   name: string;

@@ -15,7 +15,7 @@ import {
   CloneResponse
 } from './types';
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backend.texoai.com.au';
 
 const useAuthHeaders = () => {
   const getHeaders = async () => {
