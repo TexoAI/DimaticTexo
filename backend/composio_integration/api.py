@@ -385,11 +385,9 @@ async def get_toolkit_icon(
     current_user_id: str = Depends(get_current_user_id_from_jwt)
 ):
     try:
-        logger.info(f"Fetching icon for toolkit: {toolkit_slug}")
         toolkit_service = ToolkitService()
-        logger.info(f"Using toolkit service: {toolkit_service}")
         icon_url = await toolkit_service.get_toolkit_icon(toolkit_slug)
-        logger.info(f"Icon URL for {toolkit_slug}: {icon_url}")
+        
         if icon_url:
             return {
                 "success": True,
