@@ -66,6 +66,7 @@ services:
       - DAYTONA_TARGET=${DAYTONA_TARGET}
       - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
       - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+      - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
     depends_on:
       redis:
         condition: service_healthy
@@ -115,6 +116,7 @@ services:
       - DAYTONA_TARGET=${DAYTONA_TARGET}
       - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
       - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+      - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
     depends_on:
       redis:
         condition: service_healthy
