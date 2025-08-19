@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/client';
 import { handleApiError, handleNetworkError, ErrorContext, ApiError } from './error-handler';
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://31.97.233.167:8000/api';
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 
 export interface ApiClientOptions {
   showErrors?: boolean;
