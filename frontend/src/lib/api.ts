@@ -5,6 +5,7 @@ import posthog from 'posthog-js';
 // Get backend URL from environment variables
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 console.log(process.env)
+console.log(`API URL log init: ${API_URL}`)
 
 // Set to keep track of agent runs that are known to be non-running
 const nonRunningAgentRuns = new Set<string>();
@@ -1552,7 +1553,7 @@ export const initiateAgent = async (
 
 export const checkApiHealth = async (): Promise<HealthCheckResponse> => {
   try {
-    console.log(`API URL: ${API_URL}`)
+    console.log(`API URL health: ${API_URL}`)
     const response = await fetch(`${API_URL}/health`, {
       cache: 'no-store',
     });
