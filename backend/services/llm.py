@@ -378,9 +378,6 @@ async def make_llm_api_call(
     logger.info(f"Making LLM API call to model: {model_name} (Thinking: {enable_thinking}, Effort: {reasoning_effort})")
     logger.info(f"📡 API Call: Using model {model_name}")
     
-    # Add specific logging for GLM models
-    if "glm-4.5" in model_name.lower():
-        logger.info(f"🔧 GLM Model Configuration: timeout={params.get('timeout', 'default')}, provider={params.get('provider', 'default')}")
     params = prepare_params(
         messages=messages,
         model_name=model_name,
@@ -398,12 +395,22 @@ async def make_llm_api_call(
         reasoning_effort=reasoning_effort
     )
     
+    # Add specific logging for GLM models
+    if "glm-4.5" in model_name.lower():
+        logger.info(f"🔧 GLM Model Configuration: timeout={params.get('timeout', 'default')}, provider={params.get('provider', 'default')}")
+    
     # Add timeout for all requests
     params["timeout"] = 60  # 60 seconds default timeout
     
     # Add specific timeout for GLM models
     if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower():
         params["timeout"] = GLM_TIMEOUT  # Custom timeout for GLM models
+        # Ensure provider is set for GLM models
+        if "provider" not in params:
+            params["provider"] = {
+                "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
+            }
+    
     last_error = None
     # Track if we've already tried fallback for GLM models
     glm_fallback_attempted = False
@@ -441,6 +448,18 @@ async def make_llm_api_call(
                 fallback_model = get_openrouter_fallback(model_name)
                 if fallback_model and fallback_model != model_name:
                     logger.info(f"Trying fallback model {fallback_model} for GLM model {model_name} due to connection error")
+                    params["model"] = fallback_model
+                    glm_fallback_attempted = True
+                    continue
+            await handle_error(e, attempt, MAX_RETRIES)
+        except litellm.exceptions.PermissionDeniedError as e:
+            logger.error(f"Permission denied error for model {model_name}: {str(e)}")
+            last_error = e
+            # For GLM models, try fallback on permission errors
+            if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower() and not glm_fallback_attempted:
+                fallback_model = get_openrouter_fallback(model_name)
+                if fallback_model and fallback_model != model_name:
+                    logger.info(f"Trying fallback model {fallback_model} for GLM model {model_name} due to permission error")
                     params["model"] = fallback_model
                     glm_fallback_attempted = True
                     continue
