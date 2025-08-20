@@ -467,7 +467,7 @@ class AgentRunner:
             if "glm-4.5v" in self.config.model_name.lower():
                 return 66000  # GLM-4.5V has 66K context
             else:
-                return 128000  # GLM-4.5 and GLM-4.5-Air have 128K context
+                return 65536  # GLM-4.5 and GLM-4.5-Air have 131K total context, use conservative max_tokens
         return None
     
     async def run(self) -> AsyncGenerator[Dict[str, Any], None]:
