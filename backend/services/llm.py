@@ -29,6 +29,7 @@ litellm.drop_params = True
 MAX_RETRIES = 2
 RATE_LIMIT_DELAY = 30
 RETRY_DELAY = 0.1
+GLM_TIMEOUT = 120  # 2 minutes timeout for GLM models
 
 class LLMError(Exception):
     """Base exception for LLM-related errors."""
@@ -95,6 +96,14 @@ def get_openrouter_fallback(model_name: str) -> Optional[str]:
         return "openrouter/anthropic/claude-sonnet-4"
     elif "xai" in model_name.lower() or "grok" in model_name.lower():
         return "openrouter/x-ai/grok-4"
+    elif "glm-4.5" in model_name.lower():
+        # Add fallback for GLM models
+        if "glm-4.5v" in model_name.lower():
+            return "openrouter/z-ai/glm-4.5v"
+        elif "glm-4.5-air" in model_name.lower():
+            return "openrouter/z-ai/glm-4.5-air"
+        else:
+            return "openrouter/z-ai/glm-4.5"
     
     return None
 
@@ -291,14 +300,18 @@ def prepare_params(
         }
 
     if is_glm:
-        params["provider"] = {
-            "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
-        }
+        # Ensure we're using the correct provider for GLM models
+        if model_name.startswith("openrouter/"):
+            params["provider"] = {
+                "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
+            }
 
     if is_glm_vision:
-        params["provider"] = {
-            "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
-        }
+        # Ensure we're using the correct provider for GLM vision models
+        if model_name.startswith("openrouter/"):
+            params["provider"] = {
+                "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
+            }
 
     if is_anthropic and use_thinking:
         effort_level = reasoning_effort if reasoning_effort else 'low'
@@ -364,6 +377,10 @@ async def make_llm_api_call(
     # debug <timestamp>.json messages
     logger.info(f"Making LLM API call to model: {model_name} (Thinking: {enable_thinking}, Effort: {reasoning_effort})")
     logger.info(f"📡 API Call: Using model {model_name}")
+    
+    # Add specific logging for GLM models
+    if "glm-4.5" in model_name.lower():
+        logger.info(f"🔧 GLM Model Configuration: timeout={params.get('timeout', 'default')}, provider={params.get('provider', 'default')}")
     params = prepare_params(
         messages=messages,
         model_name=model_name,
@@ -380,7 +397,17 @@ async def make_llm_api_call(
         enable_thinking=enable_thinking,
         reasoning_effort=reasoning_effort
     )
+    
+    # Add timeout for all requests
+    params["timeout"] = 60  # 60 seconds default timeout
+    
+    # Add specific timeout for GLM models
+    if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower():
+        params["timeout"] = GLM_TIMEOUT  # Custom timeout for GLM models
     last_error = None
+    # Track if we've already tried fallback for GLM models
+    glm_fallback_attempted = False
+    
     for attempt in range(MAX_RETRIES):
         try:
             logger.debug(f"Attempt {attempt + 1}/{MAX_RETRIES}")
@@ -394,9 +421,41 @@ async def make_llm_api_call(
         except (litellm.exceptions.RateLimitError, OpenAIError, json.JSONDecodeError) as e:
             last_error = e
             await handle_error(e, attempt, MAX_RETRIES)
-
+        except litellm.exceptions.APIError as e:
+            logger.error(f"API error for model {model_name}: {str(e)}")
+            last_error = e
+            # For GLM models, try fallback immediately
+            if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower() and not glm_fallback_attempted:
+                fallback_model = get_openrouter_fallback(model_name)
+                if fallback_model and fallback_model != model_name:
+                    logger.info(f"Trying fallback model {fallback_model} for GLM model {model_name}")
+                    params["model"] = fallback_model
+                    glm_fallback_attempted = True
+                    continue
+            await handle_error(e, attempt, MAX_RETRIES)
+        except (litellm.exceptions.Timeout, litellm.exceptions.ServiceUnavailableError) as e:
+            logger.error(f"Connection error for model {model_name}: {str(e)}")
+            last_error = e
+            # For GLM models, try fallback on connection issues
+            if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower() and not glm_fallback_attempted:
+                fallback_model = get_openrouter_fallback(model_name)
+                if fallback_model and fallback_model != model_name:
+                    logger.info(f"Trying fallback model {fallback_model} for GLM model {model_name} due to connection error")
+                    params["model"] = fallback_model
+                    glm_fallback_attempted = True
+                    continue
+            await handle_error(e, attempt, MAX_RETRIES)
         except Exception as e:
-            logger.error(f"Unexpected error during API call: {str(e)}", exc_info=True)
+            logger.error(f"Unexpected error during API call to {model_name}: {str(e)}", exc_info=True)
+            last_error = e
+            # For GLM models, try fallback on any unexpected error
+            if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower() and not glm_fallback_attempted:
+                fallback_model = get_openrouter_fallback(model_name)
+                if fallback_model and fallback_model != model_name:
+                    logger.info(f"Trying fallback model {fallback_model} for GLM model {model_name} due to unexpected error")
+                    params["model"] = fallback_model
+                    glm_fallback_attempted = True
+                    continue
             raise LLMError(f"API call failed: {str(e)}")
 
     error_msg = f"Failed to make API call after {MAX_RETRIES} attempts"
