@@ -282,10 +282,22 @@ def prepare_params(
     is_anthropic = "anthropic" in effective_model_name.lower() or "claude" in effective_model_name.lower()
     is_xai = "xai" in effective_model_name.lower() or model_name.startswith("xai/")
     is_kimi_k2 = "kimi-k2" in effective_model_name.lower() or model_name.startswith("moonshotai/kimi-k2")
+    is_glm = "glm-4.5" in effective_model_name.lower() and "glm-4.5v" not in effective_model_name.lower()
+    is_glm_vision = "glm-4.5v" in effective_model_name.lower()
 
     if is_kimi_k2:
         params["provider"] = {
             "order": ["together/fp8", "novita/fp8", "baseten/fp8", "moonshotai", "groq"]
+        }
+
+    if is_glm:
+        params["provider"] = {
+            "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
+        }
+
+    if is_glm_vision:
+        params["provider"] = {
+            "order": ["z-ai", "together/fp8", "novita/fp8", "baseten/fp8"]
         }
 
     if is_anthropic and use_thinking:
