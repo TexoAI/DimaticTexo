@@ -155,10 +155,28 @@ def prepare_params(
             logger.debug(f"Skipping max_tokens for Claude 3.7 model: {model_name}")
             # Do not add any max_tokens parameter for Claude 3.7
         else:
+            # Adjust max_tokens for GLM models to respect context window limits
+            adjusted_max_tokens = max_tokens
+            if "glm-4.5" in model_name.lower() and "openrouter" in model_name.lower():
+                # GLM models have a maximum context length of 131072 tokens
+                # Calculate input tokens and adjust max_tokens accordingly
+                try:
+                    input_tokens = litellm.token_counter(messages=messages, model=model_name)
+                    max_context_length = 131072
+                    # Ensure we leave some buffer for safety
+                    buffer = 1000
+                    max_allowed_output_tokens = max_context_length - input_tokens - buffer
+                    # Only adjust if the requested max_tokens would exceed the limit
+                    if adjusted_max_tokens > max_allowed_output_tokens:
+                        adjusted_max_tokens = max(max_allowed_output_tokens, 1)
+                        logger.info(f"Adjusted max_tokens for GLM model {model_name} from {max_tokens} to {adjusted_max_tokens} (input tokens: {input_tokens})")
+                except Exception as e:
+                    logger.warning(f"Failed to calculate input tokens for GLM model {model_name}: {e}")
+            
             is_openai_o_series = 'o1' in model_name
             is_openai_gpt5 = 'gpt-5' in model_name
             param_name = "max_completion_tokens" if (is_openai_o_series or is_openai_gpt5) else "max_tokens"
-            params[param_name] = max_tokens
+            params[param_name] = adjusted_max_tokens
 
     # Add tools if provided
     if tools:
