@@ -4,29 +4,23 @@ import { siteConfig } from '@/lib/site';
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  keywords: ['Kortix Suna', 'Kortix', 'Suna', 'AI', 'Agent', 'Open Source'],
+  keywords: ['Dimatic Suna', 'Dimatic', 'Texo', 'AI', 'Agent'],
   authors: [
     {
-      name: 'Kortix AI Corp',
-      url: 'https://kortix.ai',
+      name: 'Dimatic',
+      url: 'https://dimatic.com.au',
     },
   ],
-  creator: 'Kortix AI Corp',
+  creator: 'Dimatic',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_AUS',
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.name,
-    description: siteConfig.description,
-    creator: '@kortixai',
-  },
-  robots: {
+   robots: {
     index: true,
     follow: true,
     googleBot: {

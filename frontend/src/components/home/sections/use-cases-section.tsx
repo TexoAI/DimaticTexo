@@ -30,11 +30,10 @@ export function UseCasesSection() {
     >
       <SectionHeader>
         <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance">
-          See Texo in action
+          Success Stories from Real Businesses
         </h2>
         <p className="text-muted-foreground text-center text-balance font-medium">
-          Explore real-world examples of how Texo completes complex tasks
-          autonomously
+          See how Texo helps Australian businesses save time, cut costs, and grow faster
         </p>
       </SectionHeader>
 

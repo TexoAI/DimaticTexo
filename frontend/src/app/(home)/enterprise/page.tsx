@@ -44,13 +44,13 @@ const CustomHeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-tighter text-balance text-center">
-              <span className="text-primary">Enterprise RAG Chat.</span>
+              <span className="text-primary">Your Business Knowledge.</span>
               <br />
-              <span className="text-secondary">Your Knowledge, Amplified.</span>
+              <span className="text-secondary">At Your Fingertips.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight max-w-3xl">
-              Transform your business documents, policies, and knowledge base into an intelligent conversational assistant. Codex delivers instant, accurate answers from your enterprise data.
+              Imagine having your best employee available 24/7 to answer any question about your business. Codex turns years of company knowledge into instant, intelligent responses that help your team work smarter and faster.
             </p>
             
             <div className="flex flex-col items-center gap-6 pt-6">
@@ -64,15 +64,15 @@ const CustomHeroSection = () => {
               <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  <span>30-minute live demo</span>
+                  <span>Free consultation</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  <span>Custom knowledge integration</span>
+                  <span>See immediate results</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  <span>Enterprise security</span>
+                  <span>No upfront commitment</span>
                 </div>
               </div>
             </div>
@@ -92,10 +92,10 @@ const ValuePropSection = () => {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Why Businesses Choose Codex
+              Why Australian Businesses Love Codex
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              The intelligent RAG solution that transforms how your team accesses and utilizes enterprise knowledge.
+              Smart business owners are already using Codex to save time, reduce costs, and delight their customers.
             </p>
           </SectionHeader>
 
@@ -106,9 +106,9 @@ const ValuePropSection = () => {
                   <Search className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Instant Knowledge Access</h3>
+                  <h3 className="text-xl font-semibold mb-3">Cut Support Costs by 60%</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Stop wasting time searching through documents. Codex understands context and delivers precise answers from your entire knowledge base in natural conversation.
+                    Your customers get instant, accurate answers to their questions, day or night. No more expensive call centres or frustrated customers waiting for responses. Just happy customers and lower operational costs.
                   </p>
                 </div>
               </div>
@@ -120,9 +120,9 @@ const ValuePropSection = () => {
                   <Shield className="w-6 h-6 text-secondary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Enterprise-Grade Security</h3>
+                  <h3 className="text-xl font-semibold mb-3">Scale Without Growing Headcount</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Your data stays secure with enterprise encryption, access controls, and compliance frameworks. Built for organizations that can't compromise on security.
+                    Handle more customers, more questions, and more complexity without hiring additional staff. Codex works around the clock, doesn't take sick days, and never forgets important information.
                   </p>
                 </div>
               </div>
@@ -139,21 +139,21 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: <Brain className="w-8 h-8" />,
-      title: "Intelligent Document Processing",
-      description: "Advanced RAG technology that understands context, relationships, and nuanced meaning across your entire document ecosystem including PDFs, Word docs, spreadsheets, and more.",
-      category: "AI-Powered"
+      title: "Turn Documents into Gold",
+      description: "All those policies, procedures, and training manuals gathering digital dust? Codex transforms them into your most valuable business asset. Every document becomes instantly searchable and actionable.",
+      category: "Business Value"
     },
     {
       icon: <MessageSquare className="w-8 h-8" />,
-      title: "Natural Conversation Interface", 
-      description: "Chat naturally with your knowledge base. Ask complex questions, request summaries, compare documents, and get detailed explanations in plain language.",
-      category: "User Experience"
+      title: "Chat Like a Human, Think Like a Computer", 
+      description: "No training required. Your team simply asks questions in plain English and gets expert-level answers instantly. It's like having your most knowledgeable employee available 24/7.",
+      category: "Easy to Use"
     },
     {
       icon: <Lock className="w-8 h-8" />,
-      title: "Advanced Access Controls",
-      description: "Granular permissions ensure team members only access relevant information. Integration with SSO, role-based access, and comprehensive audit trails for compliance.",
-      category: "Security"
+      title: "Control Who Knows What",
+      description: "Different departments need different information. Codex ensures everyone gets exactly what they need to know, when they need to know it, without overwhelming them with irrelevant details.",
+      category: "Smart Access"
     }
   ];
 
@@ -163,10 +163,10 @@ const FeaturesSection = () => {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Codex Core Features
+              What Makes Codex Special
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              Powerful RAG capabilities designed for enterprise knowledge management and team productivity
+              Three game-changing features that will transform how your business operates
             </p>
           </SectionHeader>
 
@@ -209,12 +209,12 @@ const FeaturesSection = () => {
 // Use Cases Section
 const UseCasesSection = () => {
   const useCases = [
-    "Employee onboarding with instant access to policies and procedures",
-    "Customer support teams with comprehensive product knowledge",
-    "Legal teams navigating complex contract and regulatory documents", 
-    "Sales teams accessing competitive intelligence and product specifications",
-    "HR departments with policy guidance and compliance information",
-    "Technical teams with documentation, troubleshooting guides, and best practices"
+    "New starters become productive in days, not weeks, with instant access to everything they need to know",
+    "Customer service teams resolve issues faster, leading to happier customers and higher satisfaction scores",
+    "Sales teams access product knowledge instantly, closing deals with confidence and accuracy", 
+    "HR teams provide consistent policy guidance, reducing compliance risks and employee confusion",
+    "Management teams make informed decisions with instant access to company procedures and best practices",
+    "Training becomes self-service, reducing costs while improving knowledge retention across your organisation"
   ];
 
   return (
@@ -223,10 +223,10 @@ const UseCasesSection = () => {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Transform Every Department
+              Success Across Every Department
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              Codex empowers teams across your organization with instant access to relevant knowledge and expertise
+              From the front desk to the corner office, Codex delivers value where it matters most
             </p>
           </SectionHeader>
 
@@ -259,28 +259,28 @@ const UseCasesSection = () => {
 const SuccessStoriesSection = () => {
   const stories = [
     {
-      quote: "Codex reduced our customer support response time by 60%. Agents find answers instantly instead of searching through dozens of documents.",
-      author: "Sarah Chen",
-      company: "TechFlow Support",
+      quote: "We went from spending 3 hours a day answering the same customer questions to having Codex handle 90% of inquiries automatically. Our team can now focus on growing the business instead of repeating themselves.",
+      author: "Sarah Mitchell",
+      company: "Melbourne Consulting Group",
       avatar: "🎯"
     },
     {
-      quote: "Our sales team closes deals faster with instant access to competitive intelligence and product specifications through Codex.",
-      author: "Marcus Rodriguez", 
-      company: "Global Sales Corp",
+      quote: "Training new sales staff used to take months. Now they're confident and effective within two weeks because they can instantly access all our product knowledge and sales processes.",
+      author: "David Wong", 
+      company: "Brisbane Tech Solutions",
       avatar: "📈"
     },
     {
-      quote: "Employee onboarding is seamless now. New hires get instant answers about policies, procedures, and company knowledge.",
-      author: "Dr. Amanda Foster",
-      company: "HR Innovation LLC",
+      quote: "Our HR team was drowning in policy questions. Codex handles routine inquiries so our people can focus on strategic initiatives. It's like having an extra team member who never sleeps.",
+      author: "Emma Thompson",
+      company: "Sydney Manufacturing Co",
       avatar: "⚡"
     },
     {
-      quote: "Codex transformed our legal department's efficiency. Complex contract research that took hours now takes minutes.",
-      author: "James Wellington",
-      company: "Legal Solutions Group", 
-      avatar: "⚖️"
+      quote: "The best part? Our customers love getting instant, accurate answers at 2 AM. We're providing better service while reducing our operational costs. It's a true win-win.",
+      author: "Michael O'Connor",
+      company: "Perth Business Services", 
+      avatar: "⭐"
     }
   ];
 
@@ -290,10 +290,10 @@ const SuccessStoriesSection = () => {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Real Results from Real Businesses
+              Real Australian Businesses, Real Results
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              See how organizations are transforming their knowledge workflows with Codex RAG chat
+              See how local businesses are already saving time, money, and headaches with Codex
             </p>
           </SectionHeader>
 
@@ -347,10 +347,10 @@ const GettingStartedSection = () => {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Getting Started with Codex
+              Ready to Get Started?
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              Choose the approach that best fits your organization's needs and timeline
+              Choose the option that works best for your business timeline and budget
             </p>
           </SectionHeader>
 
@@ -360,9 +360,9 @@ const GettingStartedSection = () => {
                 <Zap className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">Self-Service Setup</h3>
+                <h3 className="text-xl font-semibold mb-3">Try It Yourself</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Get started immediately with our intuitive interface. Upload documents, configure settings, and start chatting with your knowledge base in minutes.
+                  Start with a free trial and see immediate results. Upload your key documents and start asking questions within minutes. No technical expertise required.
                 </p>
                 <Button variant="outline" className="rounded-full">
                   Start Free Trial
@@ -376,9 +376,9 @@ const GettingStartedSection = () => {
                 <Users className="w-6 h-6 text-secondary" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">Enterprise Implementation</h3>
+                <h3 className="text-xl font-semibold mb-3">We'll Do It for You</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  White-glove setup with dedicated support. Custom integrations, security configuration, and team training for large-scale deployments.
+                  Prefer to have experts handle everything? Our team will set up Codex, train your staff, and ensure everything works perfectly from day one. Sit back and watch the magic happen.
                 </p>
                 <Button variant="outline" className="rounded-full">
                   Contact Sales
@@ -401,10 +401,10 @@ const FinalCTASection = () => {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Ready to Transform Your Knowledge Workflow?
+              Stop Wasting Time. Start Saving Money.
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              See Codex in action and discover how RAG chat can revolutionize how your team accesses business knowledge.
+              See exactly how Codex will transform your business in a personalised 15-minute demonstration.
             </p>
           </SectionHeader>
 
@@ -422,18 +422,18 @@ const FinalCTASection = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center max-w-2xl mx-auto">
                     <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-accent/20">
                       <MessageSquare className="w-6 h-6 text-primary" />
-                      <span className="text-sm font-medium">Live Demo</span>
-                      <span className="text-xs text-muted-foreground">See it in action</span>
+                      <span className="text-sm font-medium">Free Consultation</span>
+                      <span className="text-xs text-muted-foreground">No sales pressure</span>
                     </div>
                     <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-accent/20">
                       <Database className="w-6 h-6 text-primary" />
-                      <span className="text-sm font-medium">Custom Integration</span>
-                      <span className="text-xs text-muted-foreground">Your documents</span>
+                      <span className="text-sm font-medium">Instant ROI Calculator</span>
+                      <span className="text-xs text-muted-foreground">See your savings</span>
                     </div>
                     <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-accent/20">
                       <Shield className="w-6 h-6 text-primary" />
-                      <span className="text-sm font-medium">Enterprise Security</span>
-                      <span className="text-xs text-muted-foreground">SOC 2 compliant</span>
+                      <span className="text-sm font-medium">Australian Support</span>
+                      <span className="text-xs text-muted-foreground">Local expertise</span>
                     </div>
                   </div>
                 </div>

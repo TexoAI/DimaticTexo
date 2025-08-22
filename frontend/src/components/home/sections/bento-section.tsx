@@ -9,23 +9,23 @@ export function BentoSection() {
     {
       id: 1,
       content: <FirstBentoAnimation />,
-      title: 'Design with conversation',
+      title: 'Just Tell Us What You Need',
       description:
-        'Simply describe what you need your agent to accomplish, and Suna will build it for you.',
+        'No technical jargon. Simply describe your business challenge, and Texo builds the solution you need.',
     },
     {
       id: 2,
       content: <SecondBentoAnimation />,
-      title: 'Integrate everything',
+      title: 'Works With What You Have',
       description:
-        'Connect to your favorite tools and services with our extensive library of integrations.',
+        'Connects seamlessly with your existing software and tools – no expensive overhauls required.',
     },
     {
       id: 3,
       content: <ThirdBentoAnimation />,
-      title: 'Automate intelligently',
+      title: 'Runs Your Business 24/7',
       description:
-        'Watch your agent handle complex tasks and workflows with advanced AI reasoning.',
+        'While you sleep, Texo handles tasks, answers questions, and keeps your business moving forward.',
     },
   ];
 
@@ -38,10 +38,10 @@ export function BentoSection() {
         <div className="max-w-6xl mx-auto border-l border-r border-border">
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance pb-1">
-              Build Your AI Worker in 3 Simple Steps
+              Start Seeing Results in Minutes, Not Months
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              From description to deployment, create powerful AI Workers that work autonomously in minutes.
+              Three simple steps to transform how your business operates – no technical expertise required.
             </p>
           </SectionHeader>
 

@@ -285,8 +285,8 @@ export function OpenSourceSection() {
           </motion.div>
         </div>
       ),
-      title: 'Open Source Security',
-      description: 'Benefit from the security of open source code that thousands of eyes can review, audit, and improve.',
+      title: 'Trusted by Australian Businesses',
+      description: 'With open source transparency, you can see exactly how Texo works. Australian businesses trust technology they can understand and verify.',
       showGitHubInfo: true,
     },
     {
@@ -296,8 +296,8 @@ export function OpenSourceSection() {
           <Globe className="top-28" />
         </div>
       ),
-      title: 'Transparency & Trust',
-      description: 'We believe AI should be open and accessible to everyone. Our open source approach ensures accountability, innovation, and community collaboration.',
+      title: 'Your Business, Your Rules',
+      description: 'No vendor lock-in means you stay in control. Perfect for Australian businesses who want flexibility without ongoing licensing costs.',
       showFeatures: true,
     },
   ];
@@ -312,10 +312,10 @@ export function OpenSourceSection() {
           {/* Section Header */}
           <SectionHeader>
             <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance">
-              100% Open Source
+              Built for Australian Businesses
             </h2>
             <p className="text-muted-foreground text-center text-balance font-medium">
-              Texo is fully open source. Join our community and help shape the future of AI.
+              Open source means transparency, reliability, and the flexibility Australian businesses need to grow.
             </p>
           </SectionHeader>
 
@@ -379,9 +379,9 @@ export function OpenSourceSection() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-medium">Transparency</h4>
+                      <h4 className="font-medium">Business Confidence</h4>
                       <p className="text-muted-foreground text-sm">
-                        Fully auditable codebase
+                        Open source transparency
                       </p>
                     </div>
                   </div>
@@ -412,9 +412,9 @@ export function OpenSourceSection() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-medium">Community</h4>
+                      <h4 className="font-medium">Growing Australian Community</h4>
                       <p className="text-muted-foreground text-sm">
-                        Join our developers
+                        Local support and expertise
                       </p>
                     </div>
                   </div>
@@ -445,9 +445,9 @@ export function OpenSourceSection() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-medium">Apache 2.0</h4>
+                      <h4 className="font-medium">No Surprise Costs</h4>
                       <p className="text-muted-foreground text-sm">
-                        Free to use and modify
+                        Forever free to use
                       </p>
                     </div>
                   </div>

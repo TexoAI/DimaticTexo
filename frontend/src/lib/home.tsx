@@ -58,17 +58,17 @@ export interface PricingTier {
 }
 
 export const siteConfig = {
-  name: 'Kortix Suna',
-  description: 'The Generalist AI Worker that can act on your behalf.',
-  cta: 'Start Free',
+  name: 'Dimatic Texo',
+  description: 'The smart AI solution that actually saves your business time and money.',
+  cta: 'Start Saving Time',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-  keywords: ['AI Worker', 'Generalist AI', 'Open Source AI', 'Autonomous Agent'],
+  keywords: ['Business AI', 'Australian AI', 'Task Automation', 'Business Efficiency'],
   links: {
-    email: 'support@kortix.ai',
-    twitter: 'https://x.com/kortixai',
-    // discord: 'https://discord.gg/kortixai',
-    github: 'https://github.com/Kortix-ai/Suna',
-    instagram: 'https://instagram.com/kortixai',
+    email: 'support@dimatic.ai',
+    twitter: 'https://x.com/dimaticai',
+    // discord: 'https://discord.gg/dimaticai',
+    github: 'https://github.com/Dimatic-ai/Texo',
+    instagram: 'https://instagram.com/dimaticai',
   },
   nav: {
     links: [
@@ -107,18 +107,18 @@ export const siteConfig = {
         />
       </svg>
     ),
-    badge: '100% OPEN SOURCE',
-    githubUrl: 'https://github.com/kortix-ai/suna',
-    title: 'Kortix – Build, manage and train your AI Workforce.',
+    badge: 'TRUSTED BY AUSSIE BUSINESSES',
+    githubUrl: 'https://github.com/dimatic-ai/texo',
+    title: 'Transform Your Business with AI That Actually Works',
     description:
-      'Kortix – open-source platform to build, manage and train your AI Workforce.',
-    inputPlaceholder: 'Ask Suna to...',
+      'Stop wasting time on repetitive tasks. Dimatic Texo helps Australian businesses save hours every week and grow faster.',
+    inputPlaceholder: 'Tell us about a task that wastes your time each week...',
   },
   cloudPricingItems: [
     {
       name: 'Free',
       price: '$0',
-      description: 'Perfect for getting started',
+      description: 'Perfect for testing the waters',
       buttonText: 'Start Free',
       buttonColor: 'bg-secondary text-white',
       isPopular: false,
@@ -140,7 +140,7 @@ export const siteConfig = {
       yearlyPrice: '$204',
       originalYearlyPrice: '$240',
       discountPercentage: 15,
-      description: 'Best for individuals and small teams',
+      description: 'Best for small business owners who want to save time',
       buttonText: 'Start Free',
       buttonColor: 'bg-primary text-white dark:text-black',
       isPopular: true,
@@ -164,7 +164,7 @@ export const siteConfig = {
       yearlyPrice: '$510',
       originalYearlyPrice: '$600',
       discountPercentage: 15,
-      description: 'Ideal for growing businesses',
+      description: 'Perfect for established businesses ready to scale',
       buttonText: 'Start Free',
       buttonColor: 'bg-secondary text-white',
       isPopular: false,
@@ -188,7 +188,7 @@ export const siteConfig = {
       yearlyPrice: '$1020',
       originalYearlyPrice: '$1200',
       discountPercentage: 15,
-      description: 'For established businesses',
+      description: 'For serious business growth',
       buttonText: 'Start Free',
       buttonColor: 'bg-secondary text-white',
       isPopular: false,
@@ -981,76 +981,70 @@ export const siteConfig = {
   testimonials: [
     {
       id: '1',
-      name: 'Alex Rivera',
-      role: 'CTO at InnovateTech',
-      img: 'https://randomuser.me/api/portraits/men/91.jpg',
+      name: 'Sarah Mitchell',
+      role: 'Small Business Owner, Melbourne',
+      img: 'https://randomuser.me/api/portraits/women/91.jpg',
       description: (
         <p>
-          The AI-driven analytics from #QuantumInsights have revolutionized our
-          product development cycle.
+          Texo handles all my weekly reports and customer follow-ups automatically.
           <Highlight>
-            Insights are now more accurate and faster than ever.
+            I'm saving 8 hours every week that I can spend growing my business.
           </Highlight>{' '}
-          A game-changer for tech companies.
+          Best investment I've made this year.
         </p>
       ),
     },
     {
       id: '2',
-      name: 'Samantha Lee',
-      role: 'Marketing Director at NextGen Solutions',
-      img: 'https://randomuser.me/api/portraits/women/12.jpg',
+      name: 'David Chen',
+      role: 'Restaurant Owner, Sydney',
+      img: 'https://randomuser.me/api/portraits/men/12.jpg',
       description: (
         <p>
-          Implementing #AIStream&apos;s customer prediction model has
-          drastically improved our targeting strategy.
-          <Highlight>Seeing a 50% increase in conversion rates!</Highlight>{' '}
-          Highly recommend their solutions.
+          From inventory tracking to staff scheduling, Texo manages it all.
+          <Highlight>Cut my admin time in half and increased profits by 20%!</Highlight>{' '}
+          Every business owner needs this.
         </p>
       ),
     },
     {
       id: '3',
-      name: 'Raj Patel',
-      role: 'Founder & CEO at StartUp Grid',
-      img: 'https://randomuser.me/api/portraits/men/45.jpg',
+      name: 'Emma Williams',
+      role: 'Real Estate Agent, Brisbane',
+      img: 'https://randomuser.me/api/portraits/women/45.jpg',
       description: (
         <p>
-          As a startup, we need to move fast and stay ahead. #CodeAI&apos;s
-          automated coding assistant helps us do just that.
-          <Highlight>Our development speed has doubled.</Highlight> Essential
-          tool for any startup.
+          Texo handles property research, client communications, and market analysis.
+          <Highlight>Closed 30% more deals this quarter with half the effort.</Highlight> 
+          It's like having a personal assistant that never sleeps.
         </p>
       ),
     },
     {
       id: '4',
-      name: 'Emily Chen',
-      role: 'Product Manager at Digital Wave',
-      img: 'https://randomuser.me/api/portraits/women/83.jpg',
+      name: 'Michael Thompson',
+      role: 'Accounting Firm Owner, Perth',
+      img: 'https://randomuser.me/api/portraits/men/83.jpg',
       description: (
         <p>
-          #VoiceGen&apos;s AI-driven voice synthesis has made creating global
-          products a breeze.
-          <Highlight>Localization is now seamless and efficient.</Highlight> A
-          must-have for global product teams.
+          Texo processes invoices, reconciles accounts, and generates reports automatically.
+          <Highlight>Reduced processing time by 75% and eliminated data entry errors.</Highlight>
+          My clients get faster, more accurate service.
         </p>
       ),
     },
     {
       id: '5',
-      name: 'Michael Brown',
-      role: 'Data Scientist at FinTech Innovations',
-      img: 'https://randomuser.me/api/portraits/men/1.jpg',
+      name: 'Jessica Wong',
+      role: 'E-commerce Business Owner, Adelaide',
+      img: 'https://randomuser.me/api/portraits/women/1.jpg',
       description: (
         <p>
-          Leveraging #DataCrunch&apos;s AI for our financial models has given us
-          an edge in predictive accuracy.
+          From product research to customer service, Texo handles the tedious work.
           <Highlight>
-            Our investment strategies are now powered by real-time data
-            analytics.
+            Revenue increased 40% while working fewer hours than ever.
           </Highlight>{' '}
-          Transformative for the finance industry.
+          Finally have work-life balance as a business owner.
         </p>
       ),
     },
@@ -1181,65 +1175,65 @@ export const siteConfig = {
     },
   ],
   faqSection: {
-    title: 'Frequently Asked Questions',
+    title: 'Questions Australian Business Owners Ask',
     description:
-      "Answers to common questions about Kortix Suna and its capabilities. If you have any other questions, please don't hesitate to contact us.",
+      "Everything you need to know about how Dimatic Texo can save your business time and money. Still have questions? We're here to help.",
     faQitems: [
       {
         id: 1,
-        question: 'What is an AI Worker?',
+        question: 'How will Texo save my business time?',
         answer:
-          'An AI Worker is an intelligent software program that can perform tasks autonomously, learn from interactions, and make decisions to help achieve specific goals. It combines artificial intelligence and machine learning to provide personalized assistance and automation.',
+          'Texo automates the repetitive tasks that eat up your day - data entry, research, customer follow-ups, and report generation. Most Australian businesses save 10-15 hours per week, freeing you to focus on growing your business.',
       },
       {
         id: 2,
-        question: 'How does Kortix Suna work?',
+        question: 'How much does it cost to get started?',
         answer:
-          'Kortix Suna works by analyzing your requirements, leveraging advanced AI algorithms to understand context, and executing tasks based on your instructions. It can integrate with your workflow, learn from feedback, and continuously improve its performance.',
+          'You can start completely free with $5 in AI credits included. No contracts, no setup fees. Most small businesses find our $20/month plan gives them everything they need to start saving serious time.',
       },
       {
         id: 3,
-        question: 'Is Kortix Suna really free?',
+        question: 'Is this actually free or are there hidden costs?',
         answer:
-          'Yes, Kortix Suna is completely free and open source. We believe in democratizing AI technology and making it accessible to everyone. You can use it, modify it, and contribute to its development without any cost.',
+          'Completely free to start - no credit card required. The free plan includes $5 in AI credits so you can test real tasks. Only pay when you want more credits. No setup fees, no cancellation fees, no surprises.',
       },
       {
         id: 4,
-        question: 'Can I integrate Suna with my existing tools?',
+        question: 'Will Texo work with my current business software?',
         answer:
-          'Yes, Kortix Suna is designed to be highly compatible with popular tools and platforms. We offer APIs and pre-built integrations for seamless connection with your existing workflow tools and systems.',
+          'Yes! Texo integrates with the tools you already use - Excel, Outlook, your CRM, accounting software, and more. No need to change your existing systems or retrain your team.',
       },
       {
         id: 5,
-        question: 'How can I contribute to Kortix Suna?',
+        question: 'What if I need help setting things up?',
         answer:
-          'You can contribute to Kortix Suna by submitting pull requests on GitHub, reporting bugs, suggesting new features, or helping with documentation. Join our Discord community to connect with other contributors and Hire Suna.',
+          'We provide full support to get you started. Join our community of Australian business owners, watch our step-by-step tutorials, or contact our team directly. We want to see your business succeed.',
       },
       {
         id: 6,
-        question: 'How does Kortix Suna save me time?',
+        question: 'How quickly will I see results?',
         answer:
-          'Kortix Suna automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.',
+          'Most businesses see immediate time savings from day one. Simple tasks like data entry and research can be automated within minutes. More complex workflows might take a few days to set up, but the time investment pays for itself quickly.',
       },
     ],
   },
   ctaSection: {
     id: 'cta',
-    title: 'Launch Your First AI Worker Today',
+    title: 'Stop Wasting Time. Start Growing Your Business.',
     backgroundImage: '/holo.png',
     button: {
-      text: 'Get Started for free',
+      text: 'Start Saving Time Today',
       href: '/auth',
     },
-    subtext: 'Build, manage and train your AI Workforce',
+    subtext: 'Join thousands of Australian businesses already using Texo',
   },
   footerLinks: [
     {
-      title: 'Kortix',
+      title: 'Dimatic',
       links: [
-        { id: 1, title: 'About', url: 'https://kortix.ai' },
-        { id: 3, title: 'Contact', url: 'mailto:hey@kortix.ai' },
-        { id: 4, title: 'Careers', url: 'https://kortix.ai/careers' },
+        { id: 1, title: 'About', url: 'https://dimatic.ai' },
+        { id: 3, title: 'Contact', url: 'mailto:hey@dimatic.ai' },
+        { id: 4, title: 'Careers', url: 'https://dimatic.ai/careers' },
       ],
     },
     {
@@ -1248,10 +1242,10 @@ export const siteConfig = {
         {
           id: 5,
           title: 'Documentation',
-          url: 'https://github.com/Kortix-ai/Suna',
+          url: 'https://github.com/Dimatic-ai/Texo',
         },
         { id: 7, title: 'Discord', url: 'https://discord.gg/Py6pCBUUPw' },
-        { id: 8, title: 'GitHub', url: 'https://github.com/Kortix-ai/Suna' },
+        { id: 8, title: 'GitHub', url: 'https://github.com/Dimatic-ai/Texo' },
       ],
     },
     {
@@ -1260,17 +1254,17 @@ export const siteConfig = {
         {
           id: 9,
           title: 'Privacy Policy',
-          url: 'https://suna.so/legal?tab=privacy',
+          url: 'https://texo.so/legal?tab=privacy',
         },
         {
           id: 10,
           title: 'Terms of Service',
-          url: 'https://suna.so/legal?tab=terms',
+          url: 'https://texo.so/legal?tab=terms',
         },
         {
           id: 11,
           title: 'License Apache 2.0',
-          url: 'https://github.com/Kortix-ai/Suna/blob/main/LICENSE',
+          url: 'https://github.com/Dimatic-ai/Texo/blob/main/LICENSE',
         },
       ],
     },
@@ -1278,9 +1272,9 @@ export const siteConfig = {
   useCases: [
     {
       id: 'competitor-analysis',
-      title: 'Competitor Analysis',
+      title: 'Australian Market Research',
       description:
-        'Analyze the market for my next company in the healthcare industry, located in the UK. Give me the major players, their market size, strengths, and weaknesses, and add their website URLs. Once done, generate a PDF report.',
+        'Research the competition for my café in Melbourne CBD. Find the top 10 competitors, their pricing, opening hours, customer reviews, and unique selling points. Generate a competitive analysis report with recommendations.',
       category: 'research',
       featured: true,
       icon: (
@@ -1319,11 +1313,11 @@ export const siteConfig = {
       url: 'https://suna.so/share/2fbf0552-87d6-4d12-be25-d54f435bc493',
     },
     {
-      id: 'vc-list',
-      title: 'VC List',
+      id: 'customer-outreach',
+      title: 'Customer Follow-up Automation',
       description:
-        'Give me the list of the most important VC Funds in the United States based on Assets Under Management. Give me website URLs, and if possible an email to reach them out.',
-      category: 'finance',
+        'Create personalized follow-up emails for 50 customers who haven\'t purchased in 3 months. Research their previous orders, check social media for life updates, and draft warm reconnection emails with relevant product suggestions.',
+      category: 'sales',
       featured: true,
       icon: (
         <svg
@@ -1354,11 +1348,11 @@ export const siteConfig = {
       url: 'https://suna.so/share/a172382b-aa77-42a2-a3e1-46f32a0f9c37',
     },
     {
-      id: 'candidate-search',
-      title: 'Looking for Candidates',
+      id: 'staff-scheduling',
+      title: 'Smart Staff Scheduling',
       description:
-        "Go on LinkedIn, and find 10 profiles available - they are not working right now - for a junior software engineer position, who are located in Munich, Germany. They should have at least one bachelor's degree in Computer Science or anything related to it, and 1-year of experience in any field/role.",
-      category: 'recruitment',
+        'Create next month\'s staff roster for my retail store. Consider employee availability, peak customer hours, public holidays, and labor costs. Generate optimized schedules that keep everyone happy and costs down.',
+      category: 'operations',
       featured: true,
       icon: (
         <svg
