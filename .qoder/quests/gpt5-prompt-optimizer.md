@@ -199,17 +199,17 @@ Enhanced tool descriptions that adapt based on the specific GPT-5 model being us
 })
 ```
 
-### Model-Specific Batch Processing Capabilities
+### GPT-5 Specific Batch Processing Capabilities
 
-Leverages each model's unique strengths for optimized batch operations:
+Leverages each GPT-5 model's unique strengths for optimized batch operations:
 
-#### Multi-Model Strategic Batch Execution
+#### GPT-5 Family Strategic Batch Execution
 
 ```python
-class MultiModelBatchProcessor:
+class GPT5FamilyBatchProcessor:
     """
-    Advanced batch processing designed for GPT-5/6 family models.
-    Adapts batch strategies based on model capabilities and characteristics.
+    Advanced batch processing designed for GPT-5 family models.
+    Adapts batch strategies based on Mini vs Nano capabilities and characteristics.
     """
     
     def __init__(self):
@@ -218,67 +218,116 @@ class MultiModelBatchProcessor:
                 "batch_size": "large",
                 "analysis_depth": "comprehensive",
                 "context_utilization": "maximum",
-                "reasoning_approach": "deep_strategic"
+                "reasoning_approach": "deep_strategic",
+                "priority_tier": "priority"
             },
             "gpt-5-nano": {
                 "batch_size": "medium",
                 "analysis_depth": "balanced",
                 "context_utilization": "efficient",
-                "reasoning_approach": "streamlined_effective"
-            },
-            "gpt-6-nano": {
-                "batch_size": "adaptive",
-                "analysis_depth": "predictive",
-                "context_utilization": "intelligent",
-                "reasoning_approach": "next_gen_anticipatory"
+                "reasoning_approach": "streamlined_effective",
+                "priority_tier": "priority"
             }
         }
     
-    async def optimize_batch_for_model(self, operations: List[Dict], model: str, context: Dict) -> Dict:
+    async def optimize_batch_for_gpt5_model(self, operations: List[Dict], model: str, context: Dict) -> Dict:
         """
-        Optimizes batch execution strategy based on specific model capabilities.
+        Optimizes batch execution strategy based on specific GPT-5 model capabilities.
         """
         strategy = self.model_strategies.get(model, self.model_strategies["gpt-5-nano"])
         
         return {
-            "execution_plan": await self._create_model_specific_plan(operations, strategy),
-            "resource_allocation": await self._optimize_resources_for_model(operations, strategy, context),
-            "validation_strategy": await self._design_model_validation(operations, strategy),
-            "performance_optimization": await self._apply_model_optimizations(operations, strategy)
+            "execution_plan": await self._create_gpt5_specific_plan(operations, strategy),
+            "resource_allocation": await self._optimize_resources_for_gpt5(operations, strategy, context),
+            "validation_strategy": await self._design_gpt5_validation(operations, strategy),
+            "performance_optimization": await self._apply_gpt5_optimizations(operations, strategy)
         }
 ```
 
-### Enhanced Tool Registry with GPT-5 Intelligence
+## GPT-5 Family LLM Service Enhancements
+
+### GPT-5 Model-Specific Parameter Optimization
+
+Enhanced parameter handling for GPT-5 Mini and Nano with tailored configurations:
 
 ```python
-class GPT5ToolRegistry(ToolRegistry):
+def prepare_gpt5_family_params(
+    messages: List[Dict[str, Any]],
+    model_name: str,
+    optimization_profile: str = "balanced",
+    **kwargs
+) -> Dict[str, Any]:
     """
-    Intelligent tool registry optimized for GPT-5's advanced reasoning capabilities.
-    Provides strategic tool selection and dynamic optimization.
+    Prepares optimized parameters for GPT-5 family models.
+    Implements model-specific optimizations for maximum performance.
     """
     
-    def __init__(self):
-        super().__init__()
-        self.gpt5_optimizations = {
-            "strategic_selection": True,
-            "context_awareness": True,
-            "batch_optimization": True,
-            "adaptive_parameters": True
-        }
+    base_params = {
+        "model": model_name,
+        "messages": messages,
+        "service_tier": "priority",  # Priority tier for all GPT-5 models
+        "temperature": 1.0,  # Required for GPT-5 family
+    }
     
-    async def select_optimal_tools(self, task_analysis: Dict, context: Dict) -> List[Dict]:
-        """
-        Uses GPT-5's reasoning to select the most effective tool combination.
-        Considers task complexity, resource availability, and success probability.
-        """
-        tool_candidates = await self._analyze_tool_suitability(task_analysis)
-        optimization_strategy = await self._determine_strategy(task_analysis, context)
-        
-        return await self._optimize_tool_selection(
-            candidates=tool_candidates,
-            strategy=optimization_strategy,
-            context=context
-        )
+    # GPT-5 specific optimizations
+    if "gpt-5" in model_name.lower():
+        if "mini" in model_name.lower():
+            gpt5_mini_enhancements = {
+                "strategic_depth": "comprehensive",
+                "context_synthesis": True,
+                "reasoning_effort": "high",
+                "batch_processing": True,
+                "validation_protocols": "exhaustive",
+                "priority_level": 98
+            }
+            base_params.update(gpt5_mini_enhancements)
+        elif "nano" in model_name.lower():
+            gpt5_nano_enhancements = {
+                "strategic_depth": "balanced",
+                "context_synthesis": True,
+                "reasoning_effort": "medium",
+                "batch_processing": True,
+                "validation_protocols": "comprehensive",
+                "priority_level": 97
+            }
+            base_params.update(gpt5_nano_enhancements)
+    
+    return base_params
+```
+
+### Enhanced Error Handling for GPT-5 Family
+
+Implements intelligent error handling designed for GPT-5's self-correction capabilities:
+
+```python
+async def gpt5_enhanced_api_call(
+    params: Dict[str, Any],
+    max_retries: int = 3,
+    enable_self_correction: bool = True
+) -> Union[Dict[str, Any], AsyncGenerator]:
+    """
+    Enhanced API call with GPT-5 family specific error handling and self-correction.
+    Leverages GPT-5's advanced error detection and recovery capabilities.
+    """
+    
+    for attempt in range(max_retries):
+        try:
+            response = await litellm.acompletion(**params)
+            
+            if enable_self_correction:
+                validated_response = await validate_gpt5_response(response, params)
+                if validated_response.get("needs_correction"):
+                    params = await enhance_params_with_gpt5_correction(params, validated_response)
+                    continue
+            
+            return response
+            
+        except Exception as error:
+            correction_strategy = await analyze_error_with_gpt5(error, params, attempt)
+            if correction_strategy:
+                params = await apply_gpt5_correction_strategy(params, correction_strategy)
+            else:
+                await handle_error(error, attempt, max_retries)
 ```
 
 ## Context Window Optimization
