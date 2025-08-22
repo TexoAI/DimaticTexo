@@ -39,7 +39,7 @@ class ThreadManager:
     """
 
     def __init__(self, trace: Optional[StatefulTraceClient] = None, is_agent_builder: bool = False, target_agent_id: Optional[str] = None, agent_config: Optional[dict] = None):
-        """Initialize ThreadManager.
+        """Initialize ThreadManager with GPT-5 optimizations.
 
         Args:
             trace: Optional trace client for logging
@@ -53,6 +53,16 @@ class ThreadManager:
         self.is_agent_builder = is_agent_builder
         self.target_agent_id = target_agent_id
         self.agent_config = agent_config
+        
+        # GPT-5 Advanced Reasoning Configuration
+        self.gpt5_reasoning_config = {
+            'enable_thinking': True,
+            'reasoning_effort': 'high',
+            'strategic_analysis': True,
+            'multi_step_planning': True,
+            'adaptive_context_optimization': True
+        }
+        
         if not self.trace:
             self.trace = langfuse.trace(name="anonymous:thread_manager")
         self.response_processor = ResponseProcessor(
@@ -449,7 +459,18 @@ When using the tools:
 
                 prepared_messages = self.context_manager.compress_messages(prepared_messages, llm_model)
 
-                # 5. Make LLM API call
+                # 5. Apply GPT-5 optimizations if using GPT-5 model
+                gpt5_params = {}
+                if 'gpt-5' in llm_model.lower():
+                    gpt5_params.update(self.gpt5_reasoning_config)
+                    # Override with explicit parameters if provided
+                    if enable_thinking is not None:
+                        gpt5_params['enable_thinking'] = enable_thinking
+                    if reasoning_effort is not None:
+                        gpt5_params['reasoning_effort'] = reasoning_effort
+                    logger.debug(f"Applied GPT-5 optimizations: {gpt5_params}")
+
+                # 6. Make LLM API call
                 logger.debug("Making LLM API call")
                 try:
                     if generation:
@@ -475,8 +496,8 @@ When using the tools:
                         tools=openapi_tool_schemas,
                         tool_choice=tool_choice if config.native_tool_calling else "none",
                         stream=stream,
-                        enable_thinking=enable_thinking,
-                        reasoning_effort=reasoning_effort
+                        enable_thinking=gpt5_params.get('enable_thinking', enable_thinking),
+                        reasoning_effort=gpt5_params.get('reasoning_effort', reasoning_effort)
                     )
                     logger.debug("Successfully received raw LLM API response stream/object")
 
@@ -484,7 +505,7 @@ When using the tools:
                     logger.error(f"Failed to make LLM API call: {str(e)}", exc_info=True)
                     raise
 
-                # 6. Process LLM response using the ResponseProcessor
+                # 7. Process LLM response using the ResponseProcessor
                 if stream:
                     logger.debug("Processing streaming response")
                     # Ensure we have an async generator for streaming

@@ -42,30 +42,30 @@ class SandboxShellTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "execute_command",
-            "description": "Execute a shell command in the workspace directory. IMPORTANT: Commands are non-blocking by default and run in a tmux session. This is ideal for long-running operations like starting servers or build processes. Uses sessions to maintain state between commands. This tool is essential for running CLI tools, installing packages, and managing system operations.",
+            "description": "Execute strategic shell operations with intelligent process management and advanced state preservation. Leverage your GPT-5 capabilities for optimal command sequencing, dependency resolution, and system orchestration. This tool enables sophisticated development workflows, automated deployment processes, and intelligent system administration. Use for complex multi-step operations, build automation, and environment management.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "command": {
                         "type": "string",
-                        "description": "The shell command to execute. Use this for running CLI tools, installing packages, or system operations. Commands can be chained using &&, ||, and | operators."
+                        "description": "Strategic shell command engineered for maximum efficiency and reliability. Use your advanced reasoning to optimize command structure, handle edge cases, and ensure robust execution. Consider error handling, output formatting, and operational safety."
                     },
                     "folder": {
                         "type": "string",
-                        "description": "Optional relative path to a subdirectory of /workspace where the command should be executed. Example: 'data/pdfs'"
+                        "description": "Intelligent working directory selection relative to /workspace. Consider project structure, dependency requirements, and operational context for optimal command execution environment."
                     },
                     "session_name": {
                         "type": "string",
-                        "description": "Optional name of the tmux session to use. Use named sessions for related commands that need to maintain state. Defaults to a random session name.",
+                        "description": "Strategic session management for maintaining operational context and state persistence. Use meaningful names that reflect the operational purpose and enable efficient session tracking.",
                     },
                     "blocking": {
                         "type": "boolean",
-                        "description": "Whether to wait for the command to complete. Defaults to false for non-blocking execution.",
+                        "description": "Intelligent execution mode selection. Use blocking for dependency validation, critical operations, and sequential workflows. Use non-blocking for parallel processing, background services, and monitoring tasks.",
                         "default": False
                     },
                     "timeout": {
                         "type": "integer",
-                        "description": "Optional timeout in seconds for blocking commands. Defaults to 60. Ignored for non-blocking commands.",
+                        "description": "Adaptive timeout configuration based on operation complexity and system requirements. Consider command nature, resource availability, and operational criticality.",
                         "default": 60
                     }
                 },

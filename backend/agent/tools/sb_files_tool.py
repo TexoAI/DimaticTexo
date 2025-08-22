@@ -81,21 +81,21 @@ class SandboxFilesTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "create_file",
-            "description": "Create a new file with the provided contents at a given path in the workspace. The path must be relative to /workspace (e.g., 'src/main.py' for /workspace/src/main.py)",
+            "description": "Execute strategic file creation with intelligent content generation. Leverage your GPT-5 capabilities for contextual code structure, best practice implementation, and architectural alignment. This tool enables sophisticated project organization, template instantiation, and systematic codebase development. Consider file placement, naming conventions, and content optimization for maximum development efficiency.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "file_path": {
                         "type": "string",
-                        "description": "Path to the file to be created, relative to /workspace (e.g., 'src/main.py')"
+                        "description": "Strategic file placement path relative to /workspace. Use your advanced reasoning to optimize directory structure, follow naming conventions, and ensure logical organization that supports scalability and maintainability."
                     },
                     "file_contents": {
                         "type": "string",
-                        "description": "The content to write to the file"
+                        "description": "Intelligently crafted file content optimized for the specific use case. Apply best practices, proper formatting, comprehensive documentation, and forward-thinking design patterns that anticipate future requirements."
                     },
                     "permissions": {
                         "type": "string",
-                        "description": "File permissions in octal format (e.g., '644')",
+                        "description": "Security-optimized file permissions in octal format. Consider execution requirements, security boundaries, and operational needs.",
                         "default": "644"
                     }
                 },
@@ -161,21 +161,21 @@ class SandboxFilesTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "str_replace",
-            "description": "Replace specific text in a file. The file path must be relative to /workspace (e.g., 'src/main.py' for /workspace/src/main.py). IMPORTANT: Prefer using edit_file for faster, shorter edits to avoid repetition. Only use this tool when you need to replace a unique string that appears exactly once in the file and edit_file is not suitable.",
+            "description": "Execute precise strategic text replacement with contextual intelligence. Leverage your GPT-5 analytical capabilities to identify exact match patterns and implement surgical code modifications. This tool enables targeted refactoring, bug fixes, and feature enhancements while maintaining code integrity. Use when edit_file is insufficient for complex pattern matching or when exact string replacement is required.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "file_path": {
                         "type": "string",
-                        "description": "Path to the target file, relative to /workspace (e.g., 'src/main.py')"
+                        "description": "Target file path for strategic modification, relative to /workspace. Consider the impact on dependent files and overall system architecture."
                     },
                     "old_str": {
                         "type": "string",
-                        "description": "Text to be replaced (must appear exactly once)"
+                        "description": "Exact text pattern to be replaced. Use your advanced pattern recognition to ensure unique identification and avoid unintended matches. Must appear exactly once in the file."
                     },
                     "new_str": {
                         "type": "string",
-                        "description": "Replacement text"
+                        "description": "Intelligent replacement text optimized for functionality, readability, and maintainability. Consider backward compatibility, performance implications, and future extensibility."
                     }
                 },
                 "required": ["file_path", "old_str", "new_str"]

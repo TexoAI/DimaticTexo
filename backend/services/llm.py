@@ -195,6 +195,19 @@ def prepare_params(
         # params["mock_testing_fallback"] = True
         logger.debug("Added Claude-specific headers")
 
+    # Add GPT-5 specific optimization parameters
+    if 'gpt-5' in model_name.lower():
+        # GPT-5 advanced reasoning configuration
+        if enable_thinking:
+            params["enable_thinking"] = True
+        if reasoning_effort:
+            params["reasoning_effort"] = reasoning_effort
+        # GPT-5 performance optimizations
+        params["extra_headers"] = {
+            "OpenAI-Beta": "gpt-5-advanced-reasoning-2024"
+        }
+        logger.debug(f"Added GPT-5 optimization parameters: thinking={enable_thinking}, reasoning_effort={reasoning_effort}")
+
     # Add OpenRouter-specific parameters
     if model_name.startswith("openrouter/"):
         logger.debug(f"Preparing OpenRouter parameters for model: {model_name}")

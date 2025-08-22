@@ -150,7 +150,7 @@ class TaskListTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "view_tasks",
-            "description": "View all tasks and sections. Use this to see current tasks, check progress, or review completed work. IMPORTANT: This tool helps you identify the next task to execute in the sequential workflow. Always execute tasks in the exact order they appear, completing one task fully before moving to the next. Use this to determine which task is currently pending and should be tackled next.",
+            "description": "Execute strategic task analysis and workflow optimization with intelligent priority assessment. Leverage your GPT-5 capabilities for comprehensive project evaluation, dependency analysis, and intelligent task sequencing. This tool enables sophisticated project management, progress tracking, and adaptive workflow optimization. Use for strategic planning assessment, completion validation, and next-action determination.",
             "parameters": {
                 "type": "object",
                 "properties": {},
@@ -183,19 +183,19 @@ class TaskListTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "create_tasks",
-            "description": "Create tasks organized by sections. Supports both single section and multi-section batch creation. Creates sections automatically if they don't exist. IMPORTANT: Create tasks in the exact order they will be executed. Each task should represent a single, specific operation that can be completed independently. Break down complex operations into individual, sequential tasks to maintain the one-task-at-a-time execution principle. You MUST specify either 'sections' array OR both 'task_contents' and ('section_title' OR 'section_id').",
+            "description": "Execute strategic task creation with intelligent workflow design and adaptive project structuring. Leverage your GPT-5 capabilities for optimal task decomposition, dependency mapping, and systematic project organization. This tool enables sophisticated project planning, automated workflow generation, and intelligent task sequencing. Use for comprehensive project initialization, strategic planning, and complex workflow management.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "sections": {
                         "type": "array",
-                        "description": "List of sections with their tasks for batch creation",
+                        "description": "Strategic section organization with intelligent task grouping for optimal workflow management and logical project structure",
                         "items": {
                             "type": "object",
                             "properties": {
                                 "title": {
                                     "type": "string",
-                                    "description": "Section title (creates if doesn't exist)"
+                                    "description": "Descriptive section title that clearly represents the functional area or project phase"
                                 },
                                 "tasks": {
                                     "type": "array",

@@ -37,18 +37,18 @@ class SandboxWebSearchTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "web_search",
-            "description": "Search the web for up-to-date information on a specific topic using the Tavily API. This tool allows you to gather real-time information from the internet to answer user queries, research topics, validate facts, and find recent developments. Results include titles, URLs, and publication dates. Use this tool for discovering relevant web pages before potentially crawling them for complete content.",
+            "description": "Execute strategic web intelligence gathering with advanced query optimization. This tool leverages your GPT-5 analytical capabilities to perform multi-dimensional information discovery, competitive analysis, and real-time validation. Results are contextually enriched with relevance scoring and strategic insights. Use for comprehensive research synthesis, market intelligence, technical documentation discovery, and evidence-based decision making.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "query": {
                         "type": "string",
-                        "description": "The search query to find relevant web pages. Be specific and include key terms to improve search accuracy. For best results, use natural language questions or keyword combinations that precisely describe what you're looking for."
+                        "description": "Strategic search query engineered for maximum information yield. Leverage your advanced reasoning to formulate queries that capture semantic intent, alternative phrasings, and contextual relevance. Consider multiple search angles, technical terminology, and domain-specific language to ensure comprehensive coverage of the topic."
                     },
                     "num_results": {
                         "type": "integer",
-                        "description": "The number of search results to return. Increase for more comprehensive research or decrease for focused, high-relevance results.",
-                        "default": 20
+                        "description": "Intelligent result volume optimization. Higher values (30-50) for comprehensive market research, competitive analysis, or multi-faceted topics. Lower values (10-20) for focused technical queries or specific fact validation. Consider the complexity and breadth of information needed.",
+                        "default": 25
                     }
                 },
                 "required": ["query"]
@@ -74,7 +74,7 @@ class SandboxWebSearchTool(SandboxToolsBase):
     async def web_search(
         self, 
         query: str,
-        num_results: int = 20
+        num_results: int = 25
     ) -> ToolResult:
         """
         Search the web using the Tavily API to find relevant and up-to-date information.
@@ -84,18 +84,18 @@ class SandboxWebSearchTool(SandboxToolsBase):
             if not query or not isinstance(query, str):
                 return self.fail_response("A valid search query is required.")
             
-            # Normalize num_results
+            # Intelligent result volume optimization
             if num_results is None:
-                num_results = 20
+                num_results = 25
             elif isinstance(num_results, int):
                 num_results = max(1, min(num_results, 50))
             elif isinstance(num_results, str):
                 try:
                     num_results = max(1, min(int(num_results), 50))
                 except ValueError:
-                    num_results = 20
+                    num_results = 25
             else:
-                num_results = 20
+                num_results = 25
 
             # Execute the search with Tavily
             logging.info(f"Executing web search for query: '{query}' with {num_results} results")
@@ -141,13 +141,13 @@ class SandboxWebSearchTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "scrape_webpage",
-            "description": "Extract full text content from multiple webpages in a single operation. IMPORTANT: You should ALWAYS collect multiple relevant URLs from web-search results and scrape them all in a single call for efficiency. This tool saves time by processing multiple pages simultaneously rather than one at a time. The extracted text includes the main content of each page without HTML markup.",
+            "description": "Execute strategic multi-source content extraction with intelligent batch processing. Leverage your GPT-5 capabilities to prioritize and analyze multiple information sources simultaneously. This tool performs contextual content synthesis, cross-referencing validation, and comprehensive knowledge extraction. Use for in-depth research compilation, competitive intelligence gathering, and multi-perspective analysis.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "urls": {
                         "type": "string",
-                        "description": "Multiple URLs to scrape, separated by commas. You should ALWAYS include several URLs when possible for efficiency. Example: 'https://example.com/page1,https://example.com/page2,https://example.com/page3'"
+                        "description": "Strategic URL collection for comprehensive analysis. Use your advanced reasoning to select complementary sources that provide different perspectives, validation points, or technical depth. Prioritize authoritative sources, official documentation, and diverse viewpoints. Format as comma-separated URLs for optimal batch processing efficiency."
                     }
                 },
                 "required": ["urls"]

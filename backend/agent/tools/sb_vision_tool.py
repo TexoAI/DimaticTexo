@@ -143,13 +143,13 @@ class SandboxVisionTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "see_image",
-            "description": "Allows the agent to 'see' an image file located in the /workspace directory or from a URL. Provide either a relative path to a local image or the URL to an image. The image will be compressed before sending to reduce token usage. The image content will be made available in the next turn's context.",
+            "description": "Execute strategic visual analysis with intelligent image processing and contextual interpretation. Leverage your GPT-5 advanced visual reasoning capabilities for comprehensive image understanding, detailed analysis, and strategic insights extraction. This tool enables sophisticated visual intelligence, document analysis, design evaluation, and multi-modal reasoning workflows. Use for complex image interpretation, visual problem-solving, and comprehensive visual data analysis.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "file_path": {
                         "type": "string",
-                        "description": "Either a relative path to the image file within the /workspace directory (e.g., 'screenshots/image.png') or a URL to an image (e.g., 'https://example.com/image.jpg'). Supported formats: JPG, PNG, GIF, WEBP. Max size: 10MB."
+                        "description": "Strategic image source specification for optimal visual analysis. Provide either a contextually relevant workspace-relative path for project assets or a validated URL for external visual resources. Use your advanced reasoning to ensure optimal image selection for analysis goals and visual intelligence requirements."
                     }
                 },
                 "required": ["file_path"]

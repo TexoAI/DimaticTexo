@@ -223,13 +223,13 @@ class SandboxBrowserTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "browser_navigate_to",
-            "description": "Navigate to a specific url",
+            "description": "Execute strategic web navigation with intelligent URL analysis and context optimization. Leverage your GPT-5 capabilities to validate URLs, handle redirects, and optimize loading strategies. This tool enables sophisticated web automation workflows, competitive analysis, and systematic content discovery.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "url": {
                         "type": "string",
-                        "description": "The url to navigate to"
+                        "description": "Target URL for strategic navigation. Use your advanced reasoning to validate URL structure, consider security implications, and optimize for successful content access. Handle protocol requirements and domain validation intelligently."
                     }
                 },
                 "required": ["url"]
@@ -359,13 +359,13 @@ class SandboxBrowserTool(SandboxToolsBase):
         "type": "function",
         "function": {
             "name": "browser_click_element",
-            "description": "Click on an element by index",
+            "description": "Execute intelligent element interaction with advanced targeting and validation. Leverage your GPT-5 capabilities for precise element identification, interaction optimization, and state management. This tool enables sophisticated user interface automation, form submission workflows, and dynamic content navigation.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "index": {
                         "type": "integer",
-                        "description": "The index of the element to click"
+                        "description": "Strategic element index for precise interaction targeting. Use your advanced reasoning to identify the optimal element based on context, functionality, and user experience considerations."
                     }
                 },
                 "required": ["index"]
