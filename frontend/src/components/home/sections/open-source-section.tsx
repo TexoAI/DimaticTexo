@@ -286,7 +286,7 @@ export function OpenSourceSection() {
         </div>
       ),
       title: 'Trusted by Australian Businesses',
-      description: 'With open source transparency, you can see exactly how Texo works. Australian businesses trust technology they can understand and verify.',
+      description: 'With open source transparency, you can see exactly how Texo works.',
       showGitHubInfo: true,
     },
     {
@@ -447,7 +447,7 @@ export function OpenSourceSection() {
                     <div>
                       <h4 className="font-medium">No Surprise Costs</h4>
                       <p className="text-muted-foreground text-sm">
-                        Forever free to use
+                        Clear upfront pricing
                       </p>
                     </div>
                   </div>

@@ -94,6 +94,12 @@ export const MODELS = {
     recommended: false,
     lowQuality: false
   },
+  'gpt-5-nano': { 
+    tier: 'premium', 
+    priority: 97,
+    recommended: false,
+    lowQuality: false
+  },
   'gemini-2.5-flash:thinking': { 
     tier: 'premium', 
     priority: 84,

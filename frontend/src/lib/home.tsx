@@ -1219,7 +1219,7 @@ export const siteConfig = {
   },
   ctaSection: {
     id: 'cta',
-    title: 'Stop Wasting Time. Start Growing Your Business.',
+    title: 'Start Growing Your Business.',
     backgroundImage: '/holo.png',
     button: {
       text: 'Start Saving Time Today',

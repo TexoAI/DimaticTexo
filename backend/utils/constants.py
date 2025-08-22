@@ -100,6 +100,14 @@ MODELS = {
         },
         "tier_availability": ["paid"]
     },
+    "openai/gpt-5-nano": {
+        "aliases": ["gpt-5-nano"],
+        "pricing": {
+            "input_cost_per_million_tokens": 0.15,
+            "output_cost_per_million_tokens": 1.00
+        },
+        "tier_availability": ["paid"]
+    },
     # "openai/gpt-4.1-mini": {
     #     "aliases": ["gpt-4.1-mini"],
     #     "pricing": {
