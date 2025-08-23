@@ -19,7 +19,15 @@ from agent.tools.sb_shell_tool import SandboxShellTool
 from agent.tools.sb_files_tool import SandboxFilesTool
 from agent.tools.data_providers_tool import DataProvidersTool
 from agent.tools.expand_msg_tool import ExpandMessageTool
-from agent.prompt import get_system_prompt
+# Prefer a compact runtime system prompt optimized for smaller models.
+# Import the full system prompt as a fallback.
+from agent.prompt import get_system_prompt as get_full_system_prompt
+try:
+    from agent.compact_prompt import get_system_prompt as get_compact_system_prompt
+    USE_COMPACT_PROMPT = True
+except Exception:
+    get_compact_system_prompt = None
+    USE_COMPACT_PROMPT = False
 from agent.custom_prompt import render_prompt_template
 from utils.logger import logger
 from utils.auth_utils import get_account_id_from_thread
@@ -234,7 +242,16 @@ class PromptManager:
         if "gemini-2.5-flash" in model_name.lower() and "gemini-2.5-pro" not in model_name.lower():
             default_system_content = get_gemini_system_prompt()
         else:
-            default_system_content = get_system_prompt()
+            # Prefer the compact prompt when available to reduce token usage and improve
+            # reliability for smaller models like gpt-5-mini. Fall back to the full
+            # system prompt if compact is not available.
+            try:
+                if USE_COMPACT_PROMPT and get_compact_system_prompt:
+                    default_system_content = get_compact_system_prompt()
+                else:
+                    default_system_content = get_full_system_prompt()
+            except Exception:
+                default_system_content = get_full_system_prompt()
         
         if "anthropic" not in model_name.lower():
             sample_response_path = os.path.join(os.path.dirname(__file__), 'sample_responses/1.txt')

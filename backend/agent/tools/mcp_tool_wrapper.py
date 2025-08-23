@@ -318,7 +318,7 @@ class MCPToolWrapper(Tool):
         await self._ensure_initialized()
         if tool_registry and self._dynamic_tools:
             logger.info(f"Updating tool registry with {len(self._dynamic_tools)} MCP tools")
-            
+        
     async def get_available_tools(self) -> List[Dict[str, Any]]:
         await self._ensure_initialized()
         return self.mcp_manager.get_all_tools_openapi()
@@ -327,6 +327,81 @@ class MCPToolWrapper(Tool):
         await self._ensure_initialized()
         return await self.tool_executor.execute_tool(tool_name, arguments)
     
+    def success_response(self, data: Any) -> 'ToolResult':
+        """
+        Return a ToolResult that already contains the standardized envelope in content
+        and metadata so callers of the MCP wrapper receive the same envelope format.
+        """
+        try:
+            # Build a concise summary
+            if isinstance(data, str):
+                summary = data[:200]
+            else:
+                try:
+                    # Try to extract readable content if possible
+                    summary = str(data)[:200]
+                except Exception:
+                    summary = ""
+            envelope = {
+                "ok": True,
+                "status": "success",
+                "summary": summary,
+                "data": data,
+                "error": None
+            }
+            content_str = json.dumps(envelope, default=str)
+        except Exception:
+            envelope = {
+                "ok": True,
+                "status": "success",
+                "summary": "",
+                "data": str(data),
+                "error": None
+            }
+            content_str = str(envelope)
+        tr = ToolResult(success=True, output=content_str)
+        # Attach envelope metadata for programmatic use
+        try:
+            tr.metadata = getattr(tr, 'metadata', {}) or {}
+            tr.metadata.update({"envelope": envelope})
+            # Also set 'content' attribute if consumers expect it
+            setattr(tr, 'content', content_str)
+        except Exception:
+            pass
+        return tr
+
+    def fail_response(self, msg: str) -> 'ToolResult':
+        """
+        Return a ToolResult that already contains the standardized error envelope.
+        """
+        try:
+            summary = str(msg)[:200]
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": summary,
+                "data": None,
+                "error": str(msg)
+            }
+            content_str = json.dumps(envelope)
+        except Exception:
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": str(msg)[:200],
+                "data": None,
+                "error": str(msg)
+            }
+            content_str = str(envelope)
+        tr = ToolResult(success=False, output=content_str)
+        try:
+            tr.metadata = getattr(tr, 'metadata', {}) or {}
+            tr.metadata.update({"envelope": envelope})
+            setattr(tr, 'content', content_str)
+        except Exception:
+            pass
+        return tr
+
     async def cleanup(self):
         if self._initialized:
             try:
@@ -334,4 +409,4 @@ class MCPToolWrapper(Tool):
             except Exception as e:
                 logger.error(f"Error during MCP cleanup: {str(e)}")
             finally:
-                self._initialized = False 
+                self._initialized = False

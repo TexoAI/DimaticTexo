@@ -1,7 +1,7 @@
 import asyncio
+import json
 from typing import Optional, Dict, Any
 import time
-import asyncio
 from uuid import uuid4
 from agentpress.tool import ToolResult, openapi_schema, usage_example
 from sandbox.tool_base import SandboxToolsBase
@@ -171,23 +171,45 @@ class SandboxShellTool(SandboxToolsBase):
                 # Kill the session after capture
                 await self._execute_raw_command(f"tmux kill-session -t {session_name}")
                 
-                return self.success_response({
-                    "output": final_output,
-                    "session_name": session_name,
-                    "cwd": cwd,
-                    "completed": True
-                })
+                envelope = {
+                    "ok": True,
+                    "status": "success",
+                    "summary": (final_output[:200] if isinstance(final_output, str) else str(final_output)[:200]),
+                    "data": {
+                        "output": final_output,
+                        "session_name": session_name,
+                        "cwd": cwd,
+                        "completed": True
+                    },
+                    "error": None
+                }
+                return ToolResult(
+                    success=True,
+                    content=json.dumps(envelope, default=str),
+                    metadata={"envelope": envelope}
+                )
             else:
                 # Send command to tmux session for non-blocking execution
                 await self._execute_raw_command(f'tmux send-keys -t {session_name} "{wrapped_command}" Enter')
                 
                 # For non-blocking, just return immediately
-                return self.success_response({
-                    "session_name": session_name,
-                    "cwd": cwd,
-                    "message": f"Command sent to tmux session '{session_name}'. Use check_command_output to view results.",
-                    "completed": False
-                })
+                envelope = {
+                    "ok": True,
+                    "status": "success",
+                    "summary": f"Command sent to tmux session '{session_name}'",
+                    "data": {
+                        "session_name": session_name,
+                        "cwd": cwd,
+                        "message": f"Command sent to tmux session '{session_name}'. Use check_command_output to view results.",
+                        "completed": False
+                    },
+                    "error": None
+                }
+                return ToolResult(
+                    success=True,
+                    content=json.dumps(envelope, default=str),
+                    metadata={"envelope": envelope}
+                )
                 
         except Exception as e:
             # Attempt to clean up session in case of error
@@ -196,7 +218,18 @@ class SandboxShellTool(SandboxToolsBase):
                     await self._execute_raw_command(f"tmux kill-session -t {session_name}")
                 except:
                     pass
-            return self.fail_response(f"Error executing command: {str(e)}")
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": str(e)[:200],
+                "data": None,
+                "error": str(e)
+            }
+            return ToolResult(
+                success=False,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
 
     async def _execute_raw_command(self, command: str) -> Dict[str, Any]:
         """Execute a raw command directly in the sandbox."""
@@ -276,7 +309,19 @@ class SandboxShellTool(SandboxToolsBase):
             # Check if session exists
             check_result = await self._execute_raw_command(f"tmux has-session -t {session_name} 2>/dev/null || echo 'not_exists'")
             if "not_exists" in check_result.get("output", ""):
-                return self.fail_response(f"Tmux session '{session_name}' does not exist.")
+                msg = f"Tmux session '{session_name}' does not exist."
+                envelope = {
+                    "ok": False,
+                    "status": "error",
+                    "summary": msg,
+                    "data": None,
+                    "error": msg
+                }
+                return ToolResult(
+                    success=False,
+                    content=json.dumps(envelope, default=str),
+                    metadata={"envelope": envelope}
+                )
             
             # Get output from tmux pane
             output_result = await self._execute_raw_command(f"tmux capture-pane -t {session_name} -p -S - -E -")
@@ -289,14 +334,36 @@ class SandboxShellTool(SandboxToolsBase):
             else:
                 termination_status = "Session still running."
             
-            return self.success_response({
-                "output": output,
-                "session_name": session_name,
-                "status": termination_status
-            })
+            envelope = {
+                "ok": True,
+                "status": "success",
+                "summary": (output[:200] if isinstance(output, str) else str(output)[:200]),
+                "data": {
+                    "output": output,
+                    "session_name": session_name,
+                    "status": termination_status
+                },
+                "error": None
+            }
+            return ToolResult(
+                success=True,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
                 
         except Exception as e:
-            return self.fail_response(f"Error checking command output: {str(e)}")
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": str(e)[:200],
+                "data": None,
+                "error": str(e)
+            }
+            return ToolResult(
+                success=False,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
 
     @openapi_schema({
         "type": "function",
@@ -338,12 +405,34 @@ class SandboxShellTool(SandboxToolsBase):
             # Kill the session
             await self._execute_raw_command(f"tmux kill-session -t {session_name}")
             
-            return self.success_response({
-                "message": f"Tmux session '{session_name}' terminated successfully."
-            })
+            envelope = {
+                "ok": True,
+                "status": "success",
+                "summary": f"Tmux session '{session_name}' terminated successfully.",
+                "data": {
+                    "message": f"Tmux session '{session_name}' terminated successfully."
+                },
+                "error": None
+            }
+            return ToolResult(
+                success=True,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
                 
         except Exception as e:
-            return self.fail_response(f"Error terminating command: {str(e)}")
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": str(e)[:200],
+                "data": None,
+                "error": str(e)
+            }
+            return ToolResult(
+                success=False,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
 
     @openapi_schema({
         "type": "function",
@@ -372,10 +461,21 @@ class SandboxShellTool(SandboxToolsBase):
             output = result.get("output", "")
             
             if "No sessions" in output or not output.strip():
-                return self.success_response({
-                    "message": "No active tmux sessions found.",
-                    "sessions": []
-                })
+                envelope = {
+                    "ok": True,
+                    "status": "success",
+                    "summary": "No active tmux sessions found.",
+                    "data": {
+                        "message": "No active tmux sessions found.",
+                        "sessions": []
+                    },
+                    "error": None
+                }
+                return ToolResult(
+                    success=True,
+                    content=json.dumps(envelope, default=str),
+                    metadata={"envelope": envelope}
+                )
             
             # Parse session list
             sessions = []
@@ -386,13 +486,35 @@ class SandboxShellTool(SandboxToolsBase):
                         session_name = parts[0].strip()
                         sessions.append(session_name)
             
-            return self.success_response({
-                "message": f"Found {len(sessions)} active sessions.",
-                "sessions": sessions
-            })
+            envelope = {
+                "ok": True,
+                "status": "success",
+                "summary": f"Found {len(sessions)} active sessions.",
+                "data": {
+                    "message": f"Found {len(sessions)} active sessions.",
+                    "sessions": sessions
+                },
+                "error": None
+            }
+            return ToolResult(
+                success=True,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
                 
         except Exception as e:
-            return self.fail_response(f"Error listing commands: {str(e)}")
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": str(e)[:200],
+                "data": None,
+                "error": str(e)
+            }
+            return ToolResult(
+                success=False,
+                content=json.dumps(envelope, default=str),
+                metadata={"envelope": envelope}
+            )
 
     def _is_command_completed(self, current_output: str, marker: str) -> bool:
         """

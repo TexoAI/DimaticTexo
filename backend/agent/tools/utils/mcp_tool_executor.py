@@ -232,19 +232,93 @@ class MCPToolExecutor:
             return str(result)
     
     def _create_success_result(self, content: Any) -> ToolResult:
+        """
+        Wrap successful tool outputs in a standardized JSON envelope and return
+        a ToolResult whose content contains the JSON string and whose metadata
+        contains the parsed envelope for easy programmatic access.
+        Envelope format:
+        {
+            "ok": true,
+            "status": "success",
+            "summary": "one-line summary",
+            "data": <original content (raw)>,
+            "error": null
+        }
+        """
+        # Create a concise summary
+        if isinstance(content, str):
+            summary = content[:200]
+        else:
+            try:
+                # Try to extract readable text for summary
+                summary = str(self._extract_content(content))[:200]
+            except Exception:
+                summary = str(content)[:200]
+
+        envelope = {
+            "ok": True,
+            "status": "success",
+            "summary": summary,
+            "data": content,
+            "error": None
+        }
+
+        # Prefer the tool_wrapper's response format if available, but attach envelope
+        try:
+            content_str = json.dumps(envelope, default=str)
+        except Exception:
+            content_str = str(envelope)
+
         if self.tool_wrapper and hasattr(self.tool_wrapper, 'success_response'):
-            return self.tool_wrapper.success_response(content)
+            tr = self.tool_wrapper.success_response(content)
+            # Ensure metadata is a dict and attach envelope
+            tr.metadata = getattr(tr, 'metadata', {}) or {}
+            tr.metadata.update({"envelope": envelope})
+            tr.content = content_str
+            return tr
+
         return ToolResult(
             success=True,
-            content=str(content),
-            metadata={}
+            content=content_str,
+            metadata={"envelope": envelope}
         )
     
     def _create_error_result(self, error_message: str) -> ToolResult:
+        """
+        Wrap error outputs in the standardized JSON envelope and return a ToolResult
+        with the JSON string in content and envelope in metadata.
+        Envelope format:
+        {
+            "ok": false,
+            "status": "error",
+            "summary": "short error summary",
+            "data": null,
+            "error": "error message"
+        }
+        """
+        summary = str(error_message)[:200]
+        envelope = {
+            "ok": False,
+            "status": "error",
+            "summary": summary,
+            "data": None,
+            "error": str(error_message)
+        }
+
+        try:
+            content_str = json.dumps(envelope)
+        except Exception:
+            content_str = str(envelope)
+
         if self.tool_wrapper and hasattr(self.tool_wrapper, 'fail_response'):
-            return self.tool_wrapper.fail_response(error_message)
+            tr = self.tool_wrapper.fail_response(error_message)
+            tr.metadata = getattr(tr, 'metadata', {}) or {}
+            tr.metadata.update({"envelope": envelope})
+            tr.content = content_str
+            return tr
+
         return ToolResult(
             success=False,
-            content=error_message,
-            metadata={}
-        ) 
+            content=content_str,
+            metadata={"envelope": envelope}
+        )

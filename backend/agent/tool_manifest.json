@@ -1,0 +1,174 @@
+{
+  "version": "1.0",
+  "prompt_version": "2025-08-23 v1",
+  "generated_by": "assistant",
+  "tools": [
+    {
+      "name": "read_file",
+      "input_schema": {
+        "path": "string"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "content": "string (line-numbered)",
+        "error": "string|null"
+      },
+      "short_description": "Read a text file from the workspace; returns line-numbered content.",
+      "example": {
+        "call": {"path": "backend/agent/prompt.py"},
+        "result_summary": "Read 1274 lines from backend/agent/prompt.py"
+      }
+    },
+    {
+      "name": "list_files",
+      "input_schema": {
+        "path": "string",
+        "recursive": "boolean (optional)"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "files": "array of file paths",
+        "error": "string|null"
+      },
+      "short_description": "List files and directories under a path.",
+      "example": {"call": {"path": "backend/agent", "recursive": true}, "result_summary": "Listed 120 entries"}
+    },
+    {
+      "name": "search_files",
+      "input_schema": {
+        "path": "string",
+        "regex": "string",
+        "file_pattern": "string (optional)"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "matches": "array of {path,line,context}",
+        "error": "string|null"
+      },
+      "short_description": "Regex search across files with contextual results.",
+      "example": {"call": {"path": "backend/agent", "regex": "execute_command", "file_pattern": "*.py"}, "result_summary": "Found 24 matches across 10 files"}
+    },
+    {
+      "name": "execute_command",
+      "input_schema": {
+        "command": "string",
+        "cwd": "string (optional)",
+        "session_name": "string (optional)",
+        "blocking": "boolean (optional, default false)",
+        "timeout": "integer seconds (optional)"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "status": "success|error",
+        "summary": "string",
+        "stdout": "string",
+        "stderr": "string",
+        "exit_code": "int|null",
+        "error": "string|null"
+      },
+      "short_description": "Execute shell commands in the workspace, supports blocking and non-blocking via sessions.",
+      "example": {"call": {"command": "ls -la /workspace", "blocking": true}, "result_summary": "Command completed, 42 lines of output"}
+    },
+    {
+      "name": "write_to_file",
+      "input_schema": {
+        "path": "string",
+        "content": "string",
+        "line_count": "integer"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "error": "string|null"
+      },
+      "short_description": "Create or overwrite a file with provided content; line_count must match.",
+      "example": {"call": {"path": "backend/agent/tool_manifest.json", "line_count": 174}, "result_summary": "File written successfully"}
+    },
+    {
+      "name": "apply_diff",
+      "input_schema": {
+        "path": "string",
+        "diff": "string (search/replace blocks with exact original content)"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "error": "string|null"
+      },
+      "short_description": "Apply targeted edits to a file using exact SEARCH/REPLACE blocks.",
+      "example": {"call": {"path": "file.py", "diff": "<<SEARCH..."},"result_summary":"Applied 2 replacements"}
+    },
+    {
+      "name": "insert_content",
+      "input_schema": {
+        "path": "string",
+        "line": "integer (1-based, 0 to append)",
+        "content": "string"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "error": "string|null"
+      },
+      "short_description": "Insert content into a file at a specific line number.",
+      "example": {"call": {"path": "README.md", "line": 1, "content": "# Project"}, "result_summary": "Inserted 1 line at top"}
+    },
+    {
+      "name": "search_and_replace",
+      "input_schema": {
+        "path": "string",
+        "search": "string",
+        "replace": "string",
+        "use_regex": "boolean (optional)",
+        "start_line": "int (optional)",
+        "end_line": "int (optional)"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "replacements": "int",
+        "error": "string|null"
+      },
+      "short_description": "Find and replace text (supports regex), returns count of replacements.",
+      "example": {"call": {"path": "src/app.py", "search": "foo", "replace": "bar"}, "result_summary": "Replaced 3 occurrences"}
+    },
+    {
+      "name": "browser_action",
+      "input_schema": {
+        "action": "launch|click|type|hover|resize|scroll_down|scroll_up|close",
+        "url": "string (required for launch)",
+        "coordinate": "string 'x,y' (for click/hover)",
+        "text": "string (for type)",
+        "size": "string 'w,h' (for resize)"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "screenshot": "base64|null",
+        "console_logs": "string|null",
+        "error": "string|null"
+      },
+      "short_description": "Puppeteer-controlled browser interactions that return screenshots and console logs.",
+      "example": {"call": {"action": "launch", "url": "https://example.com"}, "result_summary": "Launched browser and captured screenshot"}
+    },
+    {
+      "name": "use_mcp_tool",
+      "input_schema": {
+        "server_name": "string",
+        "tool_name": "string",
+        "arguments": "object"
+      },
+      "output_schema": {
+        "ok": "boolean",
+        "summary": "string",
+        "data": "object|null",
+        "error": "string|null"
+      },
+      "short_description": "Invoke a tool provided by a connected MCP server; requires server discovery/auth.",
+      "example": {"call": {"server_name": "context7", "tool_name": "resolve-library-id", "arguments": {"libraryName": "react"}}, "result_summary": "Resolved library id"}
+    }
+  ]
+}

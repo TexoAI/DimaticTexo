@@ -117,25 +117,64 @@ class SandboxWebSearchTool(SandboxToolsBase):
             
             # Consider search successful if we have either results OR an answer
             if len(results) > 0 or (answer and answer.strip()):
+                # Build standardized envelope
+                summary = (answer[:200] if answer else str(results)[:200])
+                envelope = {
+                    "ok": True,
+                    "status": "success",
+                    "summary": summary,
+                    "data": search_response,
+                    "error": None
+                }
+                try:
+                    content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+                except Exception:
+                    content_str = str(envelope)
                 return ToolResult(
                     success=True,
-                    output=json.dumps(search_response, ensure_ascii=False)
+                    content=content_str,
+                    metadata={"envelope": envelope}
                 )
             else:
                 # No results or answer found
                 logging.warning(f"No search results or answer found for query: '{query}'")
+                envelope = {
+                    "ok": False,
+                    "status": "error",
+                    "summary": "No search results or answer found",
+                    "data": search_response,
+                    "error": None
+                }
+                try:
+                    content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+                except Exception:
+                    content_str = str(envelope)
                 return ToolResult(
                     success=False,
-                    output=json.dumps(search_response, ensure_ascii=False)
+                    content=content_str,
+                    metadata={"envelope": envelope}
                 )
         
         except Exception as e:
             error_message = str(e)
             logging.error(f"Error performing web search for '{query}': {error_message}")
-            simplified_message = f"Error performing web search: {error_message[:200]}"
-            if len(error_message) > 200:
-                simplified_message += "..."
-            return self.fail_response(simplified_message)
+            summary = error_message[:200]
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": summary,
+                "data": None,
+                "error": error_message
+            }
+            try:
+                content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+            except Exception:
+                content_str = str(envelope)
+            return ToolResult(
+                success=False,
+                content=content_str,
+                metadata={"envelope": envelope}
+            )
 
     @openapi_schema({
         "type": "function",
@@ -183,14 +222,44 @@ class SandboxWebSearchTool(SandboxToolsBase):
             # Parse the URLs parameter
             if not urls:
                 logging.warning("Scrape attempt with empty URLs")
-                return self.fail_response("Valid URLs are required.")
-            
+                envelope = {
+                    "ok": False,
+                    "status": "error",
+                    "summary": "Valid URLs are required.",
+                    "data": None,
+                    "error": "Valid URLs are required."
+                }
+                try:
+                    content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+                except Exception:
+                    content_str = str(envelope)
+                return ToolResult(
+                    success=False,
+                    content=content_str,
+                    metadata={"envelope": envelope}
+                )
+                
             # Split the URLs string into a list
             url_list = [url.strip() for url in urls.split(',') if url.strip()]
             
             if not url_list:
                 logging.warning("No valid URLs found in the input")
-                return self.fail_response("No valid URLs provided.")
+                envelope = {
+                    "ok": False,
+                    "status": "error",
+                    "summary": "No valid URLs provided.",
+                    "data": None,
+                    "error": "No valid URLs provided."
+                }
+                try:
+                    content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+                except Exception:
+                    content_str = str(envelope)
+                return ToolResult(
+                    success=False,
+                    content=content_str,
+                    metadata={"envelope": envelope}
+                )
                 
             if len(url_list) == 1:
                 logging.warning("Only a single URL provided - for efficiency you should scrape multiple URLs at once")
@@ -238,17 +307,64 @@ class SandboxWebSearchTool(SandboxToolsBase):
                         message += f"\n- {r.get('url')}: {r.get('error', 'Unknown error')}"
             else:
                 error_details = "; ".join([f"{r.get('url')}: {r.get('error', 'Unknown error')}" for r in results])
-                return self.fail_response(f"Failed to scrape all {len(results)} URLs. Errors: {error_details}")
+                envelope = {
+                    "ok": False,
+                    "status": "error",
+                    "summary": f"Failed to scrape all {len(results)} URLs.",
+                    "data": None,
+                    "error": error_details
+                }
+                try:
+                    content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+                except Exception:
+                    content_str = str(envelope)
+                return ToolResult(
+                    success=False,
+                    content=content_str,
+                    metadata={"envelope": envelope}
+                )
             
+            # Build success envelope
+            envelope = {
+                "ok": True,
+                "status": "success",
+                "summary": (message[:200] if isinstance(message, str) else str(message)[:200]),
+                "data": {
+                    "message": message,
+                    "results": results
+                },
+                "error": None
+            }
+            try:
+                content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+            except Exception:
+                content_str = str(envelope)
             return ToolResult(
                 success=True,
-                output=message
+                content=content_str,
+                metadata={"envelope": envelope}
             )
         
         except Exception as e:
             error_message = str(e)
             logging.error(f"Error in scrape_webpage: {error_message}")
-            return self.fail_response(f"Error processing scrape request: {error_message[:200]}")
+            summary = error_message[:200]
+            envelope = {
+                "ok": False,
+                "status": "error",
+                "summary": summary,
+                "data": None,
+                "error": error_message
+            }
+            try:
+                content_str = json.dumps(envelope, ensure_ascii=False, default=str)
+            except Exception:
+                content_str = str(envelope)
+            return ToolResult(
+                success=False,
+                content=content_str,
+                metadata={"envelope": envelope}
+            )
     
     async def _scrape_single_url(self, url: str) -> dict:
         """
