@@ -28,7 +28,7 @@ class SunaSyncService:
         self.repository = SunaAgentRepository()
     
     async def sync_all_agents(self, dry_run: bool = False) -> SyncResult:
-        logger.info("🚀 Starting Suna agent metadata sync")
+        logger.info("🚀 Starting Texo metadata sync")
         
         try:
             current_config = self.config_manager.get_current_config()

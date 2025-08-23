@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Dimatic Texo',
-  url: 'https://suna.so/',
+  url: 'https://Texo.so/',
   description: 'Dimatic',
   };
 

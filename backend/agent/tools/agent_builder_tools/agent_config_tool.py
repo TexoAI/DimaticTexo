@@ -116,9 +116,9 @@ class AgentConfigTool(AgentBuilderBaseTool):
                 
                 if restricted_fields:
                     return self.fail_response(
-                        f"Cannot modify {', '.join(restricted_fields)} for the default Suna agent. "
-                        f"Suna's core identity is managed centrally. However, you can still add MCP integrations, "
-                        f"create workflows, set up triggers, and customize other aspects of Suna."
+                        f"Cannot modify {', '.join(restricted_fields)} for the default Texo agent. "
+                        f"Texo's core identity is managed centrally. However, you can still add MCP integrations, "
+                        f"create workflows, set up triggers, and customize other aspects of Texo."
                     )
 
             agent_update_fields = {}

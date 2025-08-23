@@ -1,5 +1,5 @@
 """
-Kortix SDK for Suna AI Worker Platform
+Dimatic SDK for Texo AI Worker Platform
 
 A Python SDK for creating and managing AI Workers with thread execution capabilities.
 """
