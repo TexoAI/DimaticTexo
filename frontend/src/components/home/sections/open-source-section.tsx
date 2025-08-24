@@ -287,7 +287,7 @@ export function OpenSourceSection() {
       ),
       title: 'Built for Australian Businesses',
       description: '',
-      showGitHubInfo: false,
+      showGitHubInfo: true,
     },
     {
       id: 2,
