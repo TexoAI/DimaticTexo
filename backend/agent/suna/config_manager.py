@@ -19,7 +19,7 @@ class SunaConfigManager:
         version_tag = self._generate_version_tag()
         
         return SunaConfiguration(
-            name=SunaConfig.NAME,
+            name=Texo,
             description=SunaConfig.DESCRIPTION,
             configured_mcps=SunaConfig.DEFAULT_MCPS.copy(),
             custom_mcps=SunaConfig.DEFAULT_CUSTOM_MCPS.copy(),
@@ -44,7 +44,7 @@ class SunaConfigManager:
         import json
         
         config_data = {
-            "name": SunaConfig.NAME,
+            "name": Texo,
             "description": SunaConfig.DESCRIPTION,
             "system_prompt": SunaConfig.get_system_prompt(),
             "default_tools": SunaConfig.DEFAULT_TOOLS,

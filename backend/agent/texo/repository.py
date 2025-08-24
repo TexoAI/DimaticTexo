@@ -182,7 +182,7 @@ class SunaAgentRepository:
             
             agent_data = {
                 "account_id": account_id,
-                "name": SunaConfig.NAME,
+                "name": Texo,
                 "description": SunaConfig.DESCRIPTION,
                 "is_default": True,
                 "avatar": SunaConfig.AVATAR,
