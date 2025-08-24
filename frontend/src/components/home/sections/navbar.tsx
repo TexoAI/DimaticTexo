@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { useAuth } from '@/components/AuthProvider';
-import { useGitHubStars } from '@/hooks/use-github-stars';
+import { useGitHubStars } from '';
 import { useRouter, usePathname } from 'next/navigation';
 
 const INITIAL_WIDTH = '70rem';
@@ -62,7 +62,7 @@ export function Navbar() {
   const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const { user } = useAuth();
-  const { formattedStars, loading: starsLoading } = useGitHubStars('dimatic-ai', 'texo');
+  const { formattedStars, loading: starsLoading } = useGitHubStars();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -138,8 +138,8 @@ export function Navbar() {
                   src={logoSrc}
                   alt="Dimatic Logo"
                   width={80}
-                  height={14}
-                  className="md:w-[100px] md:h-[18px]"
+                  height={20}
+                  className="md:w-[100px] md:h-[20px]"
                   priority
                 /> 
               </Link>
