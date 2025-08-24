@@ -3,10 +3,15 @@ declare module 'motion/react' {
 
   type Unsubscribe = () => void;
 
-  // Loose stubs for motion/react used in the project.
-  // These intentionally use `any` for flexibility and to satisfy the TS compiler.
+  // loose stubs for motion/react used in the project
   export const motion: any;
   export const AnimatePresence: React.FC<any>;
+
+  // cubicBezier helper used in some components
+  export const cubicBezier: (...args: any[]) => any;
+
+  // HTMLMotionProps generic used in some components
+  export type HTMLMotionProps<T extends keyof JSX.IntrinsicElements = any> = any;
 
   // useScroll — returns an object containing a scrollY-like value with an `on` listener
   export function useScroll(): {
