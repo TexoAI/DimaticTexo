@@ -67,6 +67,8 @@ services:
       - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
       - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
       - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
+      - COMPOSIO_WEBHOOK_SECRET=${COMPOSIO_WEBHOOK_SECRET}
+      - COMPOSIO_API_BASE=${COMPOSIO_API_BASE}
     depends_on:
       redis:
         condition: service_healthy
@@ -117,6 +119,8 @@ services:
       - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
       - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
       - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
+      - COMPOSIO_WEBHOOK_SECRET=${COMPOSIO_WEBHOOK_SECRET}
+      - COMPOSIO_API_BASE=${COMPOSIO_API_BASE}
     depends_on:
       redis:
         condition: service_healthy
