@@ -206,6 +206,9 @@ def _generate_model_structures():
             # Add pricing for OpenRouter x-ai models
             openrouter_name = model_name.replace("xai/", "openrouter/x-ai/")
             pricing[openrouter_name] = config["pricing"]
+        elif model_name.startswith("openrouter/z-ai/"):
+            legacy_name = model_name.replace("openrouter/", "")
+            pricing[legacy_name] = config["pricing"]
     
     return free_models, paid_models, aliases, pricing
 

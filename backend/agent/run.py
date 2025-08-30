@@ -20,6 +20,7 @@ from agent.tools.sb_files_tool import SandboxFilesTool
 from agent.tools.data_providers_tool import DataProvidersTool
 from agent.tools.expand_msg_tool import ExpandMessageTool
 from agent.prompt import get_system_prompt
+from agent.glm_4_5_prompt import get_system_prompt as get_glm_4_5_system_prompt
 from agent.custom_prompt import render_prompt_template
 from utils.logger import logger
 from utils.auth_utils import get_account_id_from_thread
@@ -249,6 +250,8 @@ class PromptManager:
         
         if "gemini-2.5-flash" in model_name.lower() and "gemini-2.5-pro" not in model_name.lower():
             default_system_content = get_gemini_system_prompt()
+        elif "glm-4.5" in model_name.lower():
+            default_system_content = get_glm_4_5_system_prompt()
         else:
             default_system_content = get_system_prompt()
         
