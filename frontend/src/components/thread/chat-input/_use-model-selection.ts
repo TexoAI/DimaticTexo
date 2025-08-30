@@ -108,23 +108,23 @@ export const MODELS = {
   },
   
   // GLM models via OpenRouter (free tier)
-  'openrouter/z-ai/glm-4.5': { 
-    tier: 'free', 
+  'openrouter/z-ai/glm-4.5': {
+    tier: 'free',
     priority: 75,
     recommended: false,
-    lowQuality: false
+    lowQuality: false,
   },
-  'openrouter/z-ai/glm-4.5-air': { 
-    tier: 'free', 
+  'openrouter/z-ai/glm-4.5-air': {
+    tier: 'free',
     priority: 74,
     recommended: false,
-    lowQuality: false
+    lowQuality: false,
   },
-  'openrouter/z-ai/glm-4.5v': { 
-    tier: 'free', 
+  'openrouter/z-ai/glm-4.5v': {
+    tier: 'free',
     priority: 73,
     recommended: false,
-    lowQuality: false
+    lowQuality: false,
   },
   
   // 'deepseek/deepseek-chat-v3-0324': { 
