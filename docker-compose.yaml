@@ -21,7 +21,6 @@ services:
     # Assigning the service to our custom network.
     networks:
       - suna-network
-      - dokploy-network
 
   backend:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -73,14 +72,6 @@ services:
     restart: unless-stopped
     networks:
       - suna-network
-      - dokploy-network
-      labels:
-      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.middlewares=cors-header@docker,redirect-to-https@file"
-      # 2. Define the middleware
-      - "traefik.http.middlewares.cors-header.headers.accessControlAllowOriginList=https://dimatic.com.au"
-      - "traefik.http.middlewares.cors-header.headers.accessControlAllowMethods=GET,POST,OPTIONS,PUT,DELETE"
-      - "traefik.http.middlewares.cors-header.headers.accessControlAllowHeaders=*"
-      - "traefik.http.middlewares.cors-header.headers.accessControlAllowCredentials=true"
 
   worker:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -130,7 +121,6 @@ services:
     restart: unless-stopped
     networks:
       - suna-network
-      - dokploy-network
 
   frontend:
     init: true
@@ -166,15 +156,13 @@ services:
     restart: unless-stopped
     networks:
       - suna-network
-      - dokploy-network
 
 # Defining a dedicated network for all services to join.
 # This is the standard way to ensure reliable communication.
 networks:
   suna-network:
     driver: bridge
-  dokploy-network:
-    external: true
+
 
 volumes:
   redis_data:
