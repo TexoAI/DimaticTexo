@@ -74,6 +74,29 @@ services:
     networks:
       - suna-network
       - dokploy-network
+      labels:
+      # --- Original Routing Labels (KEEP THESE) ---
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.rule=Host(`backend.dimatic.com.au`)"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.entrypoints=web"
+      - "traefik.http.services.dimatic-texo-rebuilt-mfknvn-26-web.loadbalancer.server.port=8000"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.service=dimatic-texo-rebuilt-mfknvn-26-web"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.rule=Host(`backend.dimatic.com.au`)"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.entrypoints=websecure"
+      - "traefik.http.services.dimatic-texo-rebuilt-mfknvn-26-websecure.loadbalancer.server.port=8000"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.service=dimatic-texo-rebuilt-mfknvn-26-websecure"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.tls.certresolver=letsencrypt"
+
+      # --- New CORS Middleware Labels ---
+      # 1. Apply the middleware to your secure router
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.middlewares=cors-header@docker,redirect-to-https@file"
+      # 2. Define the middleware
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowOriginList=https://dimatic.com.au"
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowMethods=GET,POST,OPTIONS,PUT,DELETE"
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowHeaders=*"
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowCredentials=true"
 
   worker:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -124,6 +147,29 @@ services:
     networks:
       - suna-network
       - dokploy-network
+      labels:
+      # --- Original Routing Labels (KEEP THESE) ---
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.rule=Host(`backend.dimatic.com.au`)"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.entrypoints=web"
+      - "traefik.http.services.dimatic-texo-rebuilt-mfknvn-26-web.loadbalancer.server.port=8000"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.service=dimatic-texo-rebuilt-mfknvn-26-web"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-web.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.rule=Host(`backend.dimatic.com.au`)"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.entrypoints=websecure"
+      - "traefik.http.services.dimatic-texo-rebuilt-mfknvn-26-websecure.loadbalancer.server.port=8000"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.service=dimatic-texo-rebuilt-mfknvn-26-websecure"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.tls.certresolver=letsencrypt"
+
+      # --- New CORS Middleware Labels ---
+      # 1. Apply the middleware to your secure router
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.middlewares=cors-header@docker,redirect-to-https@file"
+      # 2. Define the middleware
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowOriginList=https://dimatic.com.au"
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowMethods=GET,POST,OPTIONS,PUT,DELETE"
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowHeaders=*"
+      - "traefik.http.middlewares.cors-header.headers.accessControlAllowCredentials=true"
 
   frontend:
     init: true
