@@ -121,6 +121,12 @@ services:
     restart: unless-stopped
     networks:
       - suna-network
+      labels:
+      # ... existing labels
+      - "traefik.http.middlewares.cors-middleware.headers.accessControlAllowOriginList=https://dimatic.com.au"
+      - "traefik.http.middlewares.cors-middleware.headers.accessControlAllowMethods=GET,POST,OPTIONS,PUT,DELETE"
+      - "traefik.http.middlewares.cors-middleware.headers.accessControlAllowHeaders=Content-Type,Authorization"
+      - "traefik.http.routers.dimatic-texo-rebuilt-mfknvn-26-websecure.middlewares=cors-middleware"
 
   frontend:
     init: true
