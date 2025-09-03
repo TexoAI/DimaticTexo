@@ -1,8 +1,12 @@
 services:
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
+    # By default, services on the same network can communicate.
+    # Exposing the port to the host is only needed if you want to connect
+    # to Redis from outside the Docker environment (e.g., from your local machine).
+    # For service-to-service communication, this is not required.
+    # ports:
+    #   - "6379:6379"
     volumes:
       - redis_data:/data
       - ./backend/services/docker/redis.conf:/usr/local/etc/redis/redis.conf:ro
@@ -12,6 +16,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    # This policy ensures the service restarts automatically if it fails.
+    restart: unless-stopped
+    # Assigning the service to our custom network.
+    networks:
+      - suna-network
+      - dokploy-network
 
   backend:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -21,20 +31,49 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend/.env:/app/.env
-    env_file:
-      - ./backend/.env
     environment:
+      # The hostname for redis is now its service name, 'redis'.
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_SSL=False
+      - ENV_MODE=${ENV_MODE}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - MORPH_API_KEY=${MORPH_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - MODEL_TO_USE=${MODEL_TO_USE}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      - FIRECRAWL_URL=${FIRECRAWL_URL}
+      - RAPID_API_KEY=${RAPID_API_KEY}
+      - SLACK_CLIENT_ID=${SLACK_CLIENT_ID}
+      - SLACK_CLIENT_SECRET=${SLACK_CLIENT_SECRET}
+      - SLACK_REDIRECT_URI=${SLACK_REDIRECT_URI}
+      - WEBHOOK_BASE_URL=${WEBHOOK_BASE_URL}
+      - TRIGGER_WEBHOOK_SECRET=${TRIGGER_WEBHOOK_SECRET}
+      - MCP_CREDENTIAL_ENCRYPTION_KEY=${MCP_CREDENTIAL_ENCRYPTION_KEY}
+      - PIPEDREAM_PROJECT_ID=${PIPEDREAM_PROJECT_ID}
+      - PIPEDREAM_CLIENT_ID=${PIPEDREAM_CLIENT_ID}
+      - PIPEDREAM_CLIENT_SECRET=${PIPEDREAM_CLIENT_SECRET}
+      - PIPEDREAM_X_PD_ENVIRONMENT=${PIPEDREAM_X_PD_ENVIRONMENT}
+      - DAYTONA_API_KEY=${DAYTONA_API_KEY}
+      - DAYTONA_SERVER_URL=${DAYTONA_SERVER_URL}
+      - DAYTONA_TARGET=${DAYTONA_TARGET}
+      - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
+      - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+      - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
     depends_on:
       redis:
         condition: service_healthy
-      worker:
-        condition: service_started
+    restart: unless-stopped
+    networks:
+      - suna-network
+      - dokploy-network
 
   worker:
     image: ghcr.io/suna-ai/suna-backend:latest
@@ -43,30 +82,93 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: uv run dramatiq --skip-logging --processes 4 --threads 4 run_agent_background
-    volumes:
-      - ./backend/.env:/app/.env:ro
-    env_file:
-      - ./backend/.env
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_SSL=False
+      - ENV_MODE=${ENV_MODE}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - MORPH_API_KEY=${MORPH_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - MODEL_TO_USE=${MODEL_TO_USE}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+      - FIRECRAWL_URL=${FIRECRAWL_URL}
+      - RAPID_API_KEY=${RAPID_API_KEY}
+      - SLACK_CLIENT_ID=${SLACK_CLIENT_ID}
+      - SLACK_CLIENT_SECRET=${SLACK_CLIENT_SECRET}
+      - SLACK_REDIRECT_URI=${SLACK_REDIRECT_URI}
+      - WEBHOOK_BASE_URL=${WEBHOOK_BASE_URL}
+      - TRIGGER_WEBHOOK_SECRET=${TRIGGER_WEBHOOK_SECRET}
+      - MCP_CREDENTIAL_ENCRYPTION_KEY=${MCP_CREDENTIAL_ENCRYPTION_KEY}
+      - PIPEDREAM_PROJECT_ID=${PIPEDREAM_PROJECT_ID}
+      - PIPEDREAM_CLIENT_ID=${PIPEDREAM_CLIENT_ID}
+      - PIPEDREAM_CLIENT_SECRET=${PIPEDREAM_CLIENT_SECRET}
+      - PIPEDREAM_X_PD_ENVIRONMENT=${PIPEDREAM_X_PD_ENVIRONMENT}
+      - DAYTONA_API_KEY=${DAYTONA_API_KEY}
+      - DAYTONA_SERVER_URL=${DAYTONA_SERVER_URL}
+      - DAYTONA_TARGET=${DAYTONA_TARGET}
+      - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
+      - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+      - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
     depends_on:
       redis:
         condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - suna-network
+      - dokploy-network
 
   frontend:
     init: true
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_ENV_MODE=${NEXT_PUBLIC_ENV_MODE}
+        - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+        - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+        - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+        - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+        - NEXT_PUBLIC_POSTHOG_KEY=${NEXT_PUBLIC_POSTHOG_KEY}
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
+        - EDGE_CONFIG=${EDGE_CONFIG}
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend/.env.local:/app/.env.local:ro
+      - "3001:3001"
+    environment:
+      - NEXT_PUBLIC_ENV_MODE=${NEXT_PUBLIC_ENV_MODE}
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+      - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+      - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+      - NEXT_PUBLIC_POSTHOG_KEY=${NEXT_PUBLIC_POSTHOG_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - KORTIX_ADMIN_API_KEY=${KORTIX_ADMIN_API_KEY}
+      - EDGE_CONFIG=${EDGE_CONFIG}
     depends_on:
       - backend
+    restart: unless-stopped
+    networks:
+      - suna-network
+      - dokploy-network
+
+# Defining a dedicated network for all services to join.
+# This is the standard way to ensure reliable communication.
+networks:
+  suna-network:
+    driver: bridge
+  dokploy-network:
+    external: true
 
 volumes:
   redis_data:
+    # Defining the volume explicitly is good practice.
